@@ -9,7 +9,7 @@ using static Match.Domain.Constants;
 
 namespace Match.Tests.WhenAskingForNumberOfPacksToUse;
 
-public class AndPlayerEntersAnInvalidInput
+public class AndPlayerEntersAValidInputOutOfExpectedRange
 {
     private StringBuilder _consoleOut;
     private Exception _caughtException;
@@ -18,8 +18,8 @@ public class AndPlayerEntersAnInvalidInput
     public void Setup()
     {
         var keyboardInput = new Mock<IKeyboardInput>();
-        var letterX = new ConsoleKeyInfo('x', ConsoleKey.X, false, false, false);
-        keyboardInput.Setup(key => key.ReceiveInput()).Returns(letterX);
+        var number0 = new ConsoleKeyInfo('0', ConsoleKey.NumPad0, false, false, false);
+        keyboardInput.Setup(key => key.ReceiveInput()).Returns(number0);
         
         _consoleOut = new StringBuilder();
         var consoleWriter = new StringWriter(_consoleOut);

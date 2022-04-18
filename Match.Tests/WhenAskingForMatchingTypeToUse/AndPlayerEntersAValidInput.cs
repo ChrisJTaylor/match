@@ -7,36 +7,36 @@ using Moq;
 using NUnit.Framework;
 using static Match.Domain.Constants;
 
-namespace Match.Tests.WhenAskingForNumberOfPacksToUse;
+namespace Match.Tests.WhenAskingForMatchingTypeToUse;
 
 public class AndPlayerEntersAValidInput
 {
     private StringBuilder _consoleOut;
-    private int _numberOfPacks;
+    private int _matchingType;
 
     [OneTimeSetUp]
     public void Setup()
     {
         var keyboardInput = new Mock<IKeyboardInput>();
-        var number2 = new ConsoleKeyInfo('2', ConsoleKey.NumPad2, false, false, false);
-        keyboardInput.Setup(key => key.ReceiveInput()).Returns(number2);
+        var number3 = new ConsoleKeyInfo('3', ConsoleKey.NumPad3, false, false, false);
+        keyboardInput.Setup(key => key.ReceiveInput()).Returns(number3);
         
         _consoleOut = new StringBuilder();
         var consoleWriter = new StringWriter(_consoleOut);
         var playerInput = new PlayerInput(consoleWriter, keyboardInput.Object);
         
-        _numberOfPacks = playerInput.AskPlayerHowManyPacksOfCardsToUse();
+        _matchingType = playerInput.AskPlayerWhichMatchingTypeToUse();
     }
 
     [Test]
     public void ItShouldAskThePlayerTheExpectedQuestion()
     {
-        _consoleOut.ToString().Should().Contain(HowManyPacksOfCardsToUse);
+        _consoleOut.ToString().Should().Contain(WhichMatchingTypeWouldYouLikeToUse);
     }
 
     [Test]
-    public void ItShouldReturnTheExpectedNumber()
+    public void ItShouldReturnTheExpectedMatchingType()
     {
-        _numberOfPacks.Should().Be(2);
+        _matchingType.Should().Be(3);
     }
 }

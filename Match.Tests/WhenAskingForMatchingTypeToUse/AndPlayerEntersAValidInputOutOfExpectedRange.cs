@@ -7,19 +7,19 @@ using Moq;
 using NUnit.Framework;
 using static Match.Domain.Constants;
 
-namespace Match.Tests.WhenAskingForNumberOfPacksToUse;
+namespace Match.Tests.WhenAskingForMatchingTypeToUse;
 
-public class AndPlayerEntersAnInvalidInput
+public class AndPlayerEntersAValidInputOutOfExpectedRange
 {
     private StringBuilder _consoleOut;
+
     private Exception _caughtException;
-    
     [OneTimeSetUp]
     public void Setup()
     {
         var keyboardInput = new Mock<IKeyboardInput>();
-        var letterX = new ConsoleKeyInfo('x', ConsoleKey.X, false, false, false);
-        keyboardInput.Setup(key => key.ReceiveInput()).Returns(letterX);
+        var number0 = new ConsoleKeyInfo('0', ConsoleKey.NumPad0, false, false, false);
+        keyboardInput.Setup(key => key.ReceiveInput()).Returns(number0);
         
         _consoleOut = new StringBuilder();
         var consoleWriter = new StringWriter(_consoleOut);
@@ -27,7 +27,7 @@ public class AndPlayerEntersAnInvalidInput
 
         try
         {
-            _ = playerInput.AskPlayerHowManyPacksOfCardsToUse();
+            _ = playerInput.AskPlayerWhichMatchingTypeToUse();
         }
         catch (Exception e)
         {
@@ -38,7 +38,7 @@ public class AndPlayerEntersAnInvalidInput
     [Test]
     public void ItShouldAskThePlayerTheExpectedQuestion()
     {
-        _consoleOut.ToString().Should().Contain(HowManyPacksOfCardsToUse);
+        _consoleOut.ToString().Should().Contain(WhichMatchingTypeWouldYouLikeToUse);
     }
 
     [Test]
@@ -51,6 +51,6 @@ public class AndPlayerEntersAnInvalidInput
     [Test]
     public void TheExceptionShouldHaveTheExpectedMessage()
     {
-        _caughtException.Message.Should().Be(YouMustEnterANumberBetween1And9);
+        _caughtException.Message.Should().Be(YouMustEnterANumberBetween1And3);
     }
 }

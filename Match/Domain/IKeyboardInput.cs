@@ -1,4 +1,4 @@
-namespace Match;
+namespace Match.Domain;
 
 public interface IKeyboardInput
 {

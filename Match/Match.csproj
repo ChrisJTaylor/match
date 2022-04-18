@@ -8,4 +8,8 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="SimpleInjector" Version="5.3.3" />
+    </ItemGroup>
+
 </Project>
