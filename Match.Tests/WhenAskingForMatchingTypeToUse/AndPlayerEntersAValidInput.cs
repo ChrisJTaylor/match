@@ -12,7 +12,7 @@ namespace Match.Tests.WhenAskingForMatchingTypeToUse;
 public class AndPlayerEntersAValidInput
 {
     private StringBuilder _consoleOut;
-    private int _matchingType;
+    private MatchingTypeEnum _matchingType;
 
     [OneTimeSetUp]
     public void Setup()
@@ -37,6 +37,6 @@ public class AndPlayerEntersAValidInput
     [Test]
     public void ItShouldReturnTheExpectedMatchingType()
     {
-        _matchingType.Should().Be(3);
+        _matchingType.Should().Be(MatchingTypeEnum.ValueAndSuite);
     }
 }
