@@ -7,15 +7,24 @@ namespace Match // Note: actual namespace depends on the project name.
     {
         static void Main(string[] args)
         {
+            var container = SetupIoC();
+            
+            var playerInput = container.GetInstance<PlayerInput>();
+            
+            var numberOfPacks = playerInput.AskPlayerHowManyPacksOfCardsToUse();
+            Console.WriteLine();
+            
+            var matchingType = playerInput.AskPlayerWhichMatchingTypeToUse();
+            Console.WriteLine();
+        }
+
+        private static Container SetupIoC()
+        {
             var container = new Container();
             container.Options.ResolveUnregisteredConcreteTypes = true;
             container.Register<IKeyboardInput, KeyboardInput>();
             container.RegisterInstance<TextWriter>(Console.Out);
-
-            var playerInput = container.GetInstance<PlayerInput>();
-
-            var numberOfPacks = playerInput.AskPlayerHowManyPacksOfCardsToUse();
-            var matchingType = playerInput.AskPlayerWhichMatchingTypeToUse();
+            return container;
         }
     }
 }
