@@ -1,8 +1,10 @@
-﻿using Match.Domain;
+﻿using System.Diagnostics.CodeAnalysis;
+using Match.Domain;
 using SimpleInjector;
 
-namespace Match // Note: actual namespace depends on the project name.
+namespace Match 
 {
+    [ExcludeFromCodeCoverage]
     internal class Program
     {
         static void Main(string[] args)

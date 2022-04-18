@@ -11,5 +11,21 @@ public struct Card
     {
         Value = value;
         Suite = suite;
-    } 
+    }
+
+    public bool IsAMatchFor(Card comparisonCard, MatchingTypeEnum matchingBy)
+    {
+        switch (matchingBy)
+        {
+            case MatchingTypeEnum.CardValue:
+                return Value == comparisonCard.Value;
+                break;
+        }
+        return false;
+    }
+
+    public override string ToString()
+    {
+        return $"{Value} of {Suite}";
+    }
 }
