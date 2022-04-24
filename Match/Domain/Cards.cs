@@ -2,24 +2,23 @@ namespace Match.Domain;
 
 public class Cards
 {
-    private readonly Card[] _pack;
-
-    public Cards()
+    static Cards()
     {
-        _pack = BuildPackOfCards().ToArray();
+        Pack = BuildPackOfCards().ToArray();
     }
     
-    public Card[] Pack => _pack;
-    private CardSuitEnum[] Suites => new[] { CardSuitEnum.Clubs, CardSuitEnum.Diamonds };
-    private CardValueEnum[] Values => new[] { CardValueEnum.One, CardValueEnum.Two, CardValueEnum.Three };
+    public static Card[] Pack { get; }
 
-    private IEnumerable<Card> BuildPackOfCards()
+    public static IEnumerable<CardSuitEnum> Suits => new[] { CardSuitEnum.Clubs, CardSuitEnum.Diamonds };
+    public static IEnumerable<CardValueEnum> Values => new[] { CardValueEnum.One, CardValueEnum.Two, CardValueEnum.Three };
+
+    private static IEnumerable<Card> BuildPackOfCards()
     {
-        foreach (var suite in Suites)
+        foreach (var suit in Suits)
         {
             foreach (var value in Values)
             {
-                yield return new Card(value, suite);
+                yield return new Card(value, suit);
             } 
         }
     }

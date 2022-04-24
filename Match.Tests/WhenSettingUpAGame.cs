@@ -1,6 +1,5 @@
 using FluentAssertions;
 using Match.Domain;
-using Match.GameControls;
 using Match.GameRoutine;
 using NUnit.Framework;
 
@@ -15,7 +14,7 @@ public class WhenSettingUpAGame
         var game = new Game(options);
         
         var cards = new Cards();
-        var expectedCount = numberOfPacks * cards.Pack.Length;
+        var expectedCount = numberOfPacks * Cards.Pack.Length;
         
         game.Deck.Should().HaveCount(expectedCount);
     }

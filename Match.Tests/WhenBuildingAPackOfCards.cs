@@ -1,27 +1,39 @@
-using System;
-using System.IO;
-using System.Text;
 using FluentAssertions;
 using Match.Domain;
-using Moq;
 using NUnit.Framework;
 
 namespace Match.Tests;
 
 public class WhenBuildingAPackOfCards
 {
-    private Cards _cards;
-
-    [OneTimeSetUp]
-    public void Setup()
-    {
-        _cards = new Cards();
-    }
-
     [Test]
     public void ItShouldContainTheExpectedNumberOfCards()
     {
-        _cards.Pack.Should().HaveCount(6);
+        Cards.Pack.Should().HaveCount(6);
     }
 
+    [Test]
+    public void ItShouldHaveTheExpectedSuits()
+    {
+        var expectedSuits = new[]
+        {
+            CardSuitEnum.Clubs,
+            CardSuitEnum.Diamonds
+        };
+
+        Cards.Suits.Should().BeEquivalentTo(expectedSuits);
+    }
+
+    [Test]
+    public void ItShouldHaveTheExpectedValues()
+    {
+        var expectedValues = new[]
+        {
+            CardValueEnum.One,
+            CardValueEnum.Two,
+            CardValueEnum.Three
+        };
+
+        Cards.Values.Should().BeEquivalentTo( expectedValues);
+    }
 }

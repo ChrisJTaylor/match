@@ -10,11 +10,10 @@ public class Game
 
     private Card[] BuildDeckWith(int numberOfPacks)
     {
-        var pack = new Cards().Pack;
         var deck = new List<Card>(); 
         for (var iteration = 1; iteration <= numberOfPacks; iteration++)
         {
-            deck.AddRange(pack);
+            deck.AddRange(Cards.Pack);
         }
 
         return deck.ToArray();
