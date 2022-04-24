@@ -3,12 +3,12 @@ namespace Match.Domain;
 public struct Card
 {
     public CardValueEnum Value { get; }
-    public CardSuiteEnum Suite { get; }
+    public CardSuitEnum Suit { get; }
 
-    public Card(CardValueEnum value, CardSuiteEnum suite)
+    public Card(CardValueEnum value, CardSuitEnum suit)
     {
         Value = value;
-        Suite = suite;
+        Suit = suit;
     }
 
     public bool IsAMatchFor(Card comparisonCard, MatchingTypeEnum matchingBy)
@@ -18,14 +18,14 @@ public struct Card
             case MatchingTypeEnum.CardValue:
                 return Value == comparisonCard.Value;
                 break;
-            case MatchingTypeEnum.Suite:
-                return Suite == comparisonCard.Suite;
+            case MatchingTypeEnum.Suit:
+                return Suit == comparisonCard.Suit;
         }
         return false;
     }
 
     public override string ToString()
     {
-        return $"{Value} of {Suite}";
+        return $"{Value} of {Suit}";
     }
 }

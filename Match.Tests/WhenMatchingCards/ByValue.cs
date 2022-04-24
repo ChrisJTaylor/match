@@ -21,15 +21,15 @@ public class ByValue
     
     static object[] MatchingCardTestCases =
     {
-        new object[] { new Card(CardValueEnum.One, CardSuiteEnum.Clubs), new Card(CardValueEnum.One, CardSuiteEnum.Diamonds) },
-        new object[] { new Card(CardValueEnum.Two, CardSuiteEnum.Clubs), new Card(CardValueEnum.Two, CardSuiteEnum.Diamonds) },
-        new object[] { new Card(CardValueEnum.Three, CardSuiteEnum.Diamonds), new Card(CardValueEnum.Three, CardSuiteEnum.Clubs) }
+        new object[] { new Card(CardValueEnum.One, CardSuitEnum.Clubs), new Card(CardValueEnum.One, CardSuitEnum.Diamonds) },
+        new object[] { new Card(CardValueEnum.Two, CardSuitEnum.Clubs), new Card(CardValueEnum.Two, CardSuitEnum.Diamonds) },
+        new object[] { new Card(CardValueEnum.Three, CardSuitEnum.Diamonds), new Card(CardValueEnum.Three, CardSuitEnum.Clubs) }
     };
     
     static object[] MismatchingCardTestCases =
     {
-        new object[] { new Card(CardValueEnum.One, CardSuiteEnum.Clubs), new Card(CardValueEnum.Three, CardSuiteEnum.Diamonds) },
-        new object[] { new Card(CardValueEnum.Two, CardSuiteEnum.Clubs), new Card(CardValueEnum.One, CardSuiteEnum.Diamonds) },
-        new object[] { new Card(CardValueEnum.Three, CardSuiteEnum.Diamonds), new Card(CardValueEnum.Two, CardSuiteEnum.Clubs) }
+        new object[] { new Card(CardValueEnum.One, CardSuitEnum.Clubs), new Card(CardValueEnum.Three, CardSuitEnum.Diamonds) },
+        new object[] { new Card(CardValueEnum.Two, CardSuitEnum.Clubs), new Card(CardValueEnum.One, CardSuitEnum.Diamonds) },
+        new object[] { new Card(CardValueEnum.Three, CardSuitEnum.Diamonds), new Card(CardValueEnum.Two, CardSuitEnum.Clubs) }
     };
 }

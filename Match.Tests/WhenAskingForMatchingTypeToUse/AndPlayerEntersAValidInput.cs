@@ -37,6 +37,6 @@ public class AndPlayerEntersAValidInput
     [Test]
     public void ItShouldReturnTheExpectedMatchingType()
     {
-        _matchingType.Should().Be(MatchingTypeEnum.CardValueAndSuite);
+        _matchingType.Should().Be(MatchingTypeEnum.CardValueAndSuit);
     }
 }

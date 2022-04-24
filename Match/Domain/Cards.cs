@@ -10,7 +10,7 @@ public class Cards
     }
     
     public Card[] Pack => _pack;
-    private CardSuiteEnum[] Suites => new[] { CardSuiteEnum.Clubs, CardSuiteEnum.Diamonds };
+    private CardSuitEnum[] Suites => new[] { CardSuitEnum.Clubs, CardSuitEnum.Diamonds };
     private CardValueEnum[] Values => new[] { CardValueEnum.One, CardValueEnum.Two, CardValueEnum.Three };
 
     private IEnumerable<Card> BuildPackOfCards()
