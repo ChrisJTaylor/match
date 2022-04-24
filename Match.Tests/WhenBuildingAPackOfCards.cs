@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Text;
 using FluentAssertions;
+using Match.Domain;
 using Moq;
 using NUnit.Framework;
 

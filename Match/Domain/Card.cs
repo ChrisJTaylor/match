@@ -1,6 +1,4 @@
-using Match.Domain;
-
-namespace Match.Tests;
+namespace Match.Domain;
 
 public struct Card
 {
