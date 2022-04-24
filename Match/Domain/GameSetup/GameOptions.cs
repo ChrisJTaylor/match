@@ -1,6 +1,4 @@
-using Match.Domain;
-
-namespace Match.GameRoutine;
+namespace Match.Domain.GameSetup;
 public class GameOptions
 {
     public GameOptions(int numberOfPacks, MatchCondition selectedMatchCondition)

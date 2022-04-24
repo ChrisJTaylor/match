@@ -2,10 +2,10 @@ using System;
 using System.IO;
 using System.Text;
 using FluentAssertions;
-using Match.GameControls;
+using Match.Domain.GameControls;
 using Moq;
 using NUnit.Framework;
-using static Match.GameControls.Constants.Questions;
+using static Match.Domain.GameControls.Constants.Questions;
 
 namespace Match.Tests.GameSetup.WhenAskingForNumberOfPacksToUse;
 

@@ -1,4 +1,4 @@
-namespace Match.GameControls;
+namespace Match.Domain.GameControls;
 
 public class InvalidInputException: Exception
 {

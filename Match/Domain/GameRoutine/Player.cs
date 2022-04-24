@@ -1,6 +1,4 @@
-using Match.Domain;
-
-namespace Match.GameRoutine;
+namespace Match.Domain.GameRoutine;
 
 public class Player
 {
