@@ -18,7 +18,7 @@ internal class Program
         {
             var gameOptions = GetOptionsFromPlayerInput();
             
-            game.SetupNewGameWithOptions(gameOptions);
+            game.StartNewGameWithOptions(gameOptions);
         }
         catch (InvalidInputException e)
         {

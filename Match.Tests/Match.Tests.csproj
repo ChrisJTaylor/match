@@ -20,8 +20,4 @@
       <ProjectReference Include="..\Match\Match.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="GameRoutine" />
-    </ItemGroup>
-
 </Project>

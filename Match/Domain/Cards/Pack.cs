@@ -1,6 +1,9 @@
+using static Match.Domain.Cards.CardSuits;
+using static Match.Domain.Cards.CardValues;
+
 namespace Match.Domain.Cards;
 
-public class Pack
+public static class Pack
 {
     static Pack()
     {
@@ -9,8 +12,14 @@ public class Pack
     
     public static Card[] Cards { get; }
 
-    public static IEnumerable<CardSuits> Suits => new[] { CardSuits.Clubs, CardSuits.Diamonds };
-    public static IEnumerable<CardValues> Values => new[] { CardValues.One, CardValues.Two, CardValues.Three };
+    public static IEnumerable<CardSuits> Suits => new[]
+    {
+        Clubs, Diamonds
+    };
+    public static IEnumerable<CardValues> Values => new[]
+    {
+        One, Two, Three
+    };
 
     private static IEnumerable<Card> BuildPackOfCards()
     {

@@ -9,9 +9,32 @@ public class Game
     public Game(IDeckBuilder deckBuilder)
     {
         _deckBuilder = deckBuilder;
+
+        Deck = new Stack<Card>();
+        Pile = new Stack<Card>();
         
-        Deck = Array.Empty<Card>();
         Players = BuildPlayers();
+    }
+    
+    public Stack<Card> Deck { get; private set; }
+    public Player[] Players { get; }
+    public Stack<Card> Pile { get; }
+
+    public void StartNewGameWithOptions(GameOptions selectedOptions)
+    {
+        var deck =_deckBuilder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse);
+        Deck = new Stack<Card>(deck);
+
+        while (GameCanContinue())
+        {
+            var cardInPlay = Deck.Pop();
+            Pile.Push(cardInPlay);
+        }
+    }
+
+    private bool GameCanContinue()
+    {
+        return Deck.Count > 0;
     }
 
     private static Player[] BuildPlayers()
@@ -21,13 +44,5 @@ public class Game
             new Player("Jack"),
             new Player("Jill")
         };
-    }
-    
-    public Card[] Deck { get; private set; }
-    public Player[] Players { get; set; }
-
-    public void SetupNewGameWithOptions(GameOptions selectedOptions)
-    {
-        Deck = _deckBuilder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse);
     }
 }
