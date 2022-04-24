@@ -18,6 +18,8 @@ public struct Card
             case MatchingTypeEnum.CardValue:
                 return Value == comparisonCard.Value;
                 break;
+            case MatchingTypeEnum.Suite:
+                return Suite == comparisonCard.Suite;
         }
         return false;
     }
