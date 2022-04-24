@@ -3,8 +3,12 @@ using Match.Domain;
 namespace Match.GameRoutine;
 public class Game
 {
-    public Game()
+    private readonly IDeckBuilder _deckBuilder;
+
+    public Game(IDeckBuilder deckBuilder)
     {
+        _deckBuilder = deckBuilder;
+        
         Deck = Array.Empty<Card>();
         Players = BuildPlayers();
     }
@@ -23,16 +27,6 @@ public class Game
 
     public void SetupNewGameWithOptions(GameOptions selectedOptions)
     {
-        Deck = BuildDeckWith(numberOfPacks: selectedOptions.NumberOfPacksToUse);
-    }
-    private static Card[] BuildDeckWith(int numberOfPacks)
-    {
-        var deck = new List<Card>(); 
-        for (var iteration = 1; iteration <= numberOfPacks; iteration++)
-        {
-            deck.AddRange(Pack.Cards);
-        }
-
-        return deck.ToArray();
+        Deck = _deckBuilder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse);
     }
 }

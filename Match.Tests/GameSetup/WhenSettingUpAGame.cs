@@ -8,8 +8,8 @@ namespace Match.Tests.GameSetup;
 
 public class WhenSettingUpAGame
 {
-    private readonly Game _game = new();
-    
+    private readonly Game _game = new(new DeckBuilder());
+
     [Test]
     public void ItShouldHaveExpectedNumberOfPlayers()
     {
@@ -29,7 +29,15 @@ public class WhenSettingUpAGame
         _game.Players.Should().OnlyContain(player => player.Pile == Array.Empty<Card>());
     }
     
-    [TestCaseSource(nameof(_gameSetupTestCases))]
+    [TestCase(1, MatchCondition.Suit)]
+    [TestCase(2, MatchCondition.CardValue)]
+    [TestCase(3, MatchCondition.Suit)]
+    [TestCase(4, MatchCondition.CardValue)]
+    [TestCase(5, MatchCondition.CardValueAndSuit)]
+    [TestCase(6, MatchCondition.Suit)]
+    [TestCase(7, MatchCondition.CardValue)]
+    [TestCase(8, MatchCondition.Suit)]
+    [TestCase(9, MatchCondition.CardValueAndSuit)]
     public void TheSelectedOptionsShouldBeApplied(int numberOfPacks, MatchCondition selectedMatchCondition)
     {
         var options = new GameOptions(numberOfPacks, selectedMatchCondition);
@@ -39,14 +47,4 @@ public class WhenSettingUpAGame
         
         _game.Deck.Should().HaveCount(expectedCount);
     }
-    
-    static object[] _gameSetupTestCases =
-    {
-        new object[] { 1, MatchCondition.Suit },
-        new object[] { 2, MatchCondition.CardValue },
-        new object[] { 3, MatchCondition.CardValueAndSuit },
-        new object[] { 5, MatchCondition.CardValue },
-        new object[] { 9, MatchCondition.Suit }
-    };
-
 }
