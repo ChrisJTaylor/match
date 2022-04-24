@@ -9,8 +9,8 @@ public class Pack
     
     public static Card[] Cards { get; }
 
-    public static IEnumerable<CardSuitEnum> Suits => new[] { CardSuitEnum.Clubs, CardSuitEnum.Diamonds };
-    public static IEnumerable<CardValueEnum> Values => new[] { CardValueEnum.One, CardValueEnum.Two, CardValueEnum.Three };
+    public static IEnumerable<CardSuits> Suits => new[] { CardSuits.Clubs, CardSuits.Diamonds };
+    public static IEnumerable<CardValues> Values => new[] { CardValues.One, CardValues.Two, CardValues.Three };
 
     private static IEnumerable<Card> BuildPackOfCards()
     {

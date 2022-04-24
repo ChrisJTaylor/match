@@ -13,7 +13,7 @@ namespace Match.Tests.GameSetup.WhenAskingForMatchingTypeToUse;
 public class AndPlayerEntersAValidInput
 {
     private StringBuilder _consoleOut = new ();
-    private MatchCondition _matchingType;
+    private MatchingCondition _matchingType;
 
     [OneTimeSetUp]
     public void Setup()
@@ -26,18 +26,18 @@ public class AndPlayerEntersAValidInput
         var consoleWriter = new StringWriter(_consoleOut);
         var playerInput = new PlayerInput(consoleWriter, keyboardInput.Object);
         
-        _matchingType = playerInput.AskPlayerWhichMatchingTypeToUse();
+        _matchingType = playerInput.AskPlayerWhichMatchingConditionToUse();
     }
 
     [Test]
     public void ItShouldAskThePlayerTheExpectedQuestion()
     {
-        _consoleOut.ToString().Should().Contain(WhichMatchingTypeWouldYouLikeToUse);
+        _consoleOut.ToString().Should().Contain(WhichMatchingConditionWouldYouLikeToUse);
     }
 
     [Test]
     public void ItShouldReturnTheExpectedMatchingType()
     {
-        _matchingType.Should().Be(MatchCondition.CardValueAndSuit);
+        _matchingType.Should().Be(MatchingCondition.CardValueAndSuit);
     }
 }

@@ -28,7 +28,7 @@ public class AndPlayerEntersAValidInputOutOfExpectedRange
 
         try
         {
-            _ = playerInput.AskPlayerWhichMatchingTypeToUse();
+            _ = playerInput.AskPlayerWhichMatchingConditionToUse();
         }
         catch (Exception e)
         {
@@ -39,7 +39,7 @@ public class AndPlayerEntersAValidInputOutOfExpectedRange
     [Test]
     public void ItShouldAskThePlayerTheExpectedQuestion()
     {
-        _consoleOut.ToString().Should().Contain(WhichMatchingTypeWouldYouLikeToUse);
+        _consoleOut.ToString().Should().Contain(WhichMatchingConditionWouldYouLikeToUse);
     }
 
     [Test]

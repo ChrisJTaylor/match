@@ -2,27 +2,27 @@ namespace Match.Domain;
 
 public struct Card
 {
-    public CardValueEnum Value { get; }
-    public CardSuitEnum Suit { get; }
+    public CardValues Value { get; }
+    public CardSuits Suit { get; }
 
-    public Card(CardValueEnum value, CardSuitEnum suit)
+    public Card(CardValues value, CardSuits suit)
     {
         Value = value;
         Suit = suit;
     }
 
-    public bool IsAMatchFor(Card comparisonCard, MatchCondition matchingBy)
+    public bool IsAMatchFor(Card comparisonCard, MatchingCondition matchingBy)
     {
         var comparisonResult = false;
         switch (matchingBy)
         {
-            case MatchCondition.CardValue:
+            case MatchingCondition.CardValue:
                  comparisonResult = Value == comparisonCard.Value;
                 break;
-            case MatchCondition.Suit:
+            case MatchingCondition.Suit:
                  comparisonResult = Suit == comparisonCard.Suit;
                 break;
-            case MatchCondition.CardValueAndSuit:
+            case MatchingCondition.CardValueAndSuit:
                  comparisonResult = Value == comparisonCard.Value && Suit == comparisonCard.Suit;
                 break;
         }

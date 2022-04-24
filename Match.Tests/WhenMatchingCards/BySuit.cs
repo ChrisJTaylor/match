@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Match.Domain;
 using NUnit.Framework;
-using static Match.Domain.MatchCondition;
+using static Match.Domain.MatchingCondition;
 
 namespace Match.Tests.WhenMatchingCards;
 
@@ -21,15 +21,15 @@ public class BySuit
     
     static object[] MatchingCardTestCases =
     {
-        new object[] { new Card(CardValueEnum.One, CardSuitEnum.Clubs), new Card(CardValueEnum.Two, CardSuitEnum.Clubs) },
-        new object[] { new Card(CardValueEnum.Two, CardSuitEnum.Diamonds), new Card(CardValueEnum.Three, CardSuitEnum.Diamonds) },
-        new object[] { new Card(CardValueEnum.Three, CardSuitEnum.Diamonds), new Card(CardValueEnum.One, CardSuitEnum.Diamonds) }
+        new object[] { new Card(CardValues.One, CardSuits.Clubs), new Card(CardValues.Two, CardSuits.Clubs) },
+        new object[] { new Card(CardValues.Two, CardSuits.Diamonds), new Card(CardValues.Three, CardSuits.Diamonds) },
+        new object[] { new Card(CardValues.Three, CardSuits.Diamonds), new Card(CardValues.One, CardSuits.Diamonds) }
     };
     
     static object[] MismatchingCardTestCases =
     {
-        new object[] { new Card(CardValueEnum.One, CardSuitEnum.Clubs), new Card(CardValueEnum.One, CardSuitEnum.Diamonds) },
-        new object[] { new Card(CardValueEnum.Two, CardSuitEnum.Clubs), new Card(CardValueEnum.Three, CardSuitEnum.Diamonds) },
-        new object[] { new Card(CardValueEnum.Three, CardSuitEnum.Diamonds), new Card(CardValueEnum.Three, CardSuitEnum.Clubs) }
+        new object[] { new Card(CardValues.One, CardSuits.Clubs), new Card(CardValues.One, CardSuits.Diamonds) },
+        new object[] { new Card(CardValues.Two, CardSuits.Clubs), new Card(CardValues.Three, CardSuits.Diamonds) },
+        new object[] { new Card(CardValues.Three, CardSuits.Diamonds), new Card(CardValues.Three, CardSuits.Clubs) }
     };
 }

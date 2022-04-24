@@ -29,16 +29,16 @@ public class PlayerInput
         throw new InvalidInputException(YouMustEnterANumberBetween1And9);
     }
 
-    public MatchCondition AskPlayerWhichMatchingTypeToUse()
+    public MatchingCondition AskPlayerWhichMatchingConditionToUse()
     {
-        _consoleWriter.WriteLine(WhichMatchingTypeWouldYouLikeToUse);
+        _consoleWriter.WriteLine(WhichMatchingConditionWouldYouLikeToUse);
         
         var key = _keyboardInput.ReceiveInput();
 
         if (int.TryParse(key.KeyChar.ToString(), out var matchingType)
             && matchingType.IsBetween(1, to: 3))
         {
-            return (MatchCondition)matchingType;
+            return (MatchingCondition)matchingType;
         }
 
         throw new InvalidInputException(YouMustEnterANumberBetween1And3);

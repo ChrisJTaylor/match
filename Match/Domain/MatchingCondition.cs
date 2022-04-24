@@ -1,6 +1,6 @@
 namespace Match.Domain;
 
-public enum MatchCondition
+public enum MatchingCondition
 {
     CardValue = 1,
     Suit = 2,

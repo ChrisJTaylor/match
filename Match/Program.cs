@@ -34,7 +34,7 @@ internal class Program
         var numberOfPacks = playerInput.AskPlayerHowManyPacksOfCardsToUse(); 
         Console.WriteLine();
             
-        var matchCondition = playerInput.AskPlayerWhichMatchingTypeToUse();
+        var matchCondition = playerInput.AskPlayerWhichMatchingConditionToUse();
         Console.WriteLine();
 
         var gameOptions = new GameOptions(numberOfPacks, matchCondition);

@@ -30,18 +30,18 @@ public class WhenSettingUpAGame
         _game.Players.Should().OnlyContain(player => player.Pile == Array.Empty<Card>());
     }
     
-    [TestCase(1, MatchCondition.Suit)]
-    [TestCase(2, MatchCondition.CardValue)]
-    [TestCase(3, MatchCondition.Suit)]
-    [TestCase(4, MatchCondition.CardValue)]
-    [TestCase(5, MatchCondition.CardValueAndSuit)]
-    [TestCase(6, MatchCondition.Suit)]
-    [TestCase(7, MatchCondition.CardValue)]
-    [TestCase(8, MatchCondition.Suit)]
-    [TestCase(9, MatchCondition.CardValueAndSuit)]
-    public void TheSelectedOptionsShouldBeApplied(int numberOfPacks, MatchCondition selectedMatchCondition)
+    [TestCase(1, MatchingCondition.Suit)]
+    [TestCase(2, MatchingCondition.CardValue)]
+    [TestCase(3, MatchingCondition.Suit)]
+    [TestCase(4, MatchingCondition.CardValue)]
+    [TestCase(5, MatchingCondition.CardValueAndSuit)]
+    [TestCase(6, MatchingCondition.Suit)]
+    [TestCase(7, MatchingCondition.CardValue)]
+    [TestCase(8, MatchingCondition.Suit)]
+    [TestCase(9, MatchingCondition.CardValueAndSuit)]
+    public void TheSelectedOptionsShouldBeApplied(int numberOfPacks, MatchingCondition selectedMatchingCondition)
     {
-        var options = new GameOptions(numberOfPacks, selectedMatchCondition);
+        var options = new GameOptions(numberOfPacks, selectedMatchingCondition);
         _game.SetupNewGameWithOptions(options);
         
         var expectedCount = numberOfPacks * Pack.Cards.Length;

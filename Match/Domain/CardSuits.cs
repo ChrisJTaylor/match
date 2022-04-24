@@ -1,6 +1,6 @@
 namespace Match.Domain;
 
-public enum CardSuitEnum
+public enum CardSuits
 {
     Clubs,
     Diamonds

@@ -1,6 +1,6 @@
 namespace Match.Domain;
 
-public enum CardValueEnum {
+public enum CardValues {
     One,
     Two,
     Three

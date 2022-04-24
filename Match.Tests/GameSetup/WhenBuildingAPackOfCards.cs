@@ -17,8 +17,8 @@ public class WhenBuildingAPackOfCards
     {
         var expectedSuits = new[]
         {
-            CardSuitEnum.Clubs,
-            CardSuitEnum.Diamonds
+            CardSuits.Clubs,
+            CardSuits.Diamonds
         };
 
         Pack.Suits.Should().BeEquivalentTo(expectedSuits);
@@ -29,9 +29,9 @@ public class WhenBuildingAPackOfCards
     {
         var expectedValues = new[]
         {
-            CardValueEnum.One,
-            CardValueEnum.Two,
-            CardValueEnum.Three
+            CardValues.One,
+            CardValues.Two,
+            CardValues.Three
         };
 
         Pack.Values.Should().BeEquivalentTo(expectedValues);
