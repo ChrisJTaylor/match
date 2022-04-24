@@ -1,3 +1,5 @@
+using Match.Domain.Cards;
+
 namespace Match.Domain.GameSetup;
 
 public interface IDeckBuilder

@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Match.Domain;
+using Match.Domain.Cards;
 using NUnit.Framework;
 
 namespace Match.Tests.GameSetup;

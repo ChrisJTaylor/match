@@ -1,7 +1,8 @@
 using FluentAssertions;
 using Match.Domain;
+using Match.Domain.Cards;
 using NUnit.Framework;
-using static Match.Domain.MatchingCondition;
+using static Match.Domain.GameRoutine.MatchingCondition;
 
 namespace Match.Tests.WhenMatchingCards;
 

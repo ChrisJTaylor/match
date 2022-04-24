@@ -1,6 +1,7 @@
 using System;
 using FluentAssertions;
 using Match.Domain;
+using Match.Domain.Cards;
 using Match.Domain.GameRoutine;
 using Match.Domain.GameSetup;
 using NUnit.Framework;

@@ -1,4 +1,4 @@
-namespace Match.Domain;
+namespace Match.Domain.GameRoutine;
 
 public enum MatchingCondition
 {

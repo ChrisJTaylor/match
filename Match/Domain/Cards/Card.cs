@@ -1,4 +1,6 @@
-namespace Match.Domain;
+using Match.Domain.GameRoutine;
+
+namespace Match.Domain.Cards;
 
 public struct Card
 {

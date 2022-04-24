@@ -1,6 +1,7 @@
+using Match.Domain.Cards;
 using Match.Domain.GameSetup;
 
-namespace Match.Domain.GameRoutine;
+namespace Match.Domain;
 public class Game
 {
     private readonly IDeckBuilder _deckBuilder;
