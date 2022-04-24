@@ -1,6 +1,6 @@
 using Match.Domain;
 
-namespace Match.GameControls;
+namespace Match.GameRoutine;
 public class Game
 {
     public Game(GameOptions withOptions)
