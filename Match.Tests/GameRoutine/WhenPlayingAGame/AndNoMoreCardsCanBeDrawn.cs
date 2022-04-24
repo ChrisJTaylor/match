@@ -1,4 +1,3 @@
-using System.Linq;
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
@@ -27,7 +26,15 @@ public class AndNoMoreCardsCanBeDrawn
         deckBuilder.Setup(builder => 
             builder.BuildDeckUsingNumberOfPacks(1))
             .Returns(_cardCollection);
-        _game = new Game(deckBuilder.Object);
+
+        var playerBuilder = new Mock<IPlayerBuilder>();
+        playerBuilder.Setup(builder => builder.BuildPlayers()).Returns(new[]
+        {
+            new Player("Bill"),
+            new Player("Ben"),
+        });
+        
+        _game = new Game(deckBuilder.Object, playerBuilder.Object);
         
         _game.StartNewGameWithOptions(new GameOptions(1, MatchingCondition.CardValueAndSuit));
     }

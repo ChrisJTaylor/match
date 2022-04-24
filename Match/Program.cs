@@ -48,6 +48,7 @@ internal class Program
         container.Register<IKeyboardInput, KeyboardInput>();
         container.RegisterInstance<TextWriter>(Console.Out);
         container.Register<IDeckBuilder, DeckBuilder>();
+        container.Register<IPlayerBuilder, PlayerBuilder>();
         return container;
     }
 }

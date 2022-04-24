@@ -10,5 +10,5 @@ public class Player
         Winnings = Array.Empty<Card>();
     }
     public string Name { get; }
-    public Card[] Winnings { get; }
+    public IList<Card> Winnings { get; }
 }
