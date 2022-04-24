@@ -12,7 +12,7 @@ namespace Match.Tests.GameSetup.WhenAskingForMatchingTypeToUse;
 
 public class AndPlayerEntersAValidInput
 {
-    private StringBuilder _consoleOut;
+    private StringBuilder _consoleOut = new ();
     private MatchCondition _matchingType;
 
     [OneTimeSetUp]

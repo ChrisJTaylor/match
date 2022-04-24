@@ -12,8 +12,8 @@ namespace Match.Tests.GameSetup.WhenAskingForNumberOfPacksToUse;
 
 public class AndPlayerEntersAValidInputOutOfExpectedRange
 {
-    private StringBuilder _consoleOut;
-    private Exception _caughtException;
+    private StringBuilder _consoleOut = new();
+    private Exception? _caughtException;
     
     [OneTimeSetUp]
     public void Setup()
@@ -52,6 +52,6 @@ public class AndPlayerEntersAValidInputOutOfExpectedRange
     [Test]
     public void TheExceptionShouldHaveTheExpectedMessage()
     {
-        _caughtException.Message.Should().Be(YouMustEnterANumberBetween1And9);
+        _caughtException!.Message.Should().Be(YouMustEnterANumberBetween1And9);
     }
 }

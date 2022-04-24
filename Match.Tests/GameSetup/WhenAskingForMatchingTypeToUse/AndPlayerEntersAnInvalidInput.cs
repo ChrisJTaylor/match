@@ -12,9 +12,9 @@ namespace Match.Tests.GameSetup.WhenAskingForMatchingTypeToUse;
 
 public class AndPlayerEntersAnInvalidInput
 {
-    private StringBuilder _consoleOut;
-
-    private Exception _caughtException;
+    private StringBuilder _consoleOut = new();
+    private Exception? _caughtException;
+    
     [OneTimeSetUp]
     public void Setup()
     {
@@ -52,6 +52,6 @@ public class AndPlayerEntersAnInvalidInput
     [Test]
     public void TheExceptionShouldHaveTheExpectedMessage()
     {
-        _caughtException.Message.Should().Be(YouMustEnterANumberBetween1And3);
+        _caughtException!.Message.Should().Be(YouMustEnterANumberBetween1And3);
     }
 }

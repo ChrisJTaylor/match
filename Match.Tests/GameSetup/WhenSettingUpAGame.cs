@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using FluentAssertions;
 using Match.Domain;
 using Match.GameRoutine;
@@ -9,14 +8,8 @@ namespace Match.Tests.GameSetup;
 
 public class WhenSettingUpAGame
 {
-    private Game _game;
+    private readonly Game _game = new();
     
-    [OneTimeSetUp]
-    public void WhenInitialisingGame()
-    {
-        _game = new Game();
-    }
-
     [Test]
     public void ItShouldHaveExpectedNumberOfPlayers()
     {
@@ -36,7 +29,7 @@ public class WhenSettingUpAGame
         _game.Players.Should().OnlyContain(player => player.Pile == Array.Empty<Card>());
     }
     
-    [TestCaseSource(nameof(GameSetupTestCases))]
+    [TestCaseSource(nameof(_gameSetupTestCases))]
     public void TheSelectedOptionsShouldBeApplied(int numberOfPacks, MatchCondition selectedMatchCondition)
     {
         var options = new GameOptions(numberOfPacks, selectedMatchCondition);
@@ -47,7 +40,7 @@ public class WhenSettingUpAGame
         _game.Deck.Should().HaveCount(expectedCount);
     }
     
-    static object[] GameSetupTestCases =
+    static object[] _gameSetupTestCases =
     {
         new object[] { 1, MatchCondition.Suit },
         new object[] { 2, MatchCondition.CardValue },
