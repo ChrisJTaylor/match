@@ -28,7 +28,7 @@ public class PlayerInput
         throw new InvalidInputException(YouMustEnterANumberBetween1And9);
     }
 
-    public MatchingTypeEnum AskPlayerWhichMatchingTypeToUse()
+    public MatchCondition AskPlayerWhichMatchingTypeToUse()
     {
         _consoleWriter.WriteLine(WhichMatchingTypeWouldYouLikeToUse);
         
@@ -37,7 +37,7 @@ public class PlayerInput
         if (int.TryParse(key.KeyChar.ToString(), out var matchingType)
             && matchingType.IsBetween(1, to: 3))
         {
-            return (MatchingTypeEnum)matchingType;
+            return (MatchCondition)matchingType;
         }
 
         throw new InvalidInputException(YouMustEnterANumberBetween1And3);

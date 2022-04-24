@@ -11,15 +11,17 @@ public struct Card
         Suit = suit;
     }
 
-    public bool IsAMatchFor(Card comparisonCard, MatchingTypeEnum matchingBy)
+    public bool IsAMatchFor(Card comparisonCard, MatchCondition matchingBy)
     {
         switch (matchingBy)
         {
-            case MatchingTypeEnum.CardValue:
+            case MatchCondition.CardValue:
                 return Value == comparisonCard.Value;
                 break;
-            case MatchingTypeEnum.Suit:
+            case MatchCondition.Suit:
                 return Suit == comparisonCard.Suit;
+            case MatchCondition.CardValueAndSuit:
+                return Value == comparisonCard.Value && Suit == comparisonCard.Suit;
         }
         return false;
     }

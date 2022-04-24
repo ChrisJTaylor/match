@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Match.Domain;
 using NUnit.Framework;
-using static Match.Domain.MatchingTypeEnum;
+using static Match.Domain.MatchCondition;
 
 namespace Match.Tests.WhenMatchingCards;
 
