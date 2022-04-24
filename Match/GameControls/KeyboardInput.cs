@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 
-namespace Match.Domain;
+namespace Match.GameControls;
 
 [ExcludeFromCodeCoverage]
 public class KeyboardInput : IKeyboardInput

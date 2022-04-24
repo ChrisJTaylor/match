@@ -13,17 +13,20 @@ public struct Card
 
     public bool IsAMatchFor(Card comparisonCard, MatchCondition matchingBy)
     {
+        var comparisonResult = false;
         switch (matchingBy)
         {
             case MatchCondition.CardValue:
-                return Value == comparisonCard.Value;
+                 comparisonResult = Value == comparisonCard.Value;
                 break;
             case MatchCondition.Suit:
-                return Suit == comparisonCard.Suit;
+                 comparisonResult = Suit == comparisonCard.Suit;
+                break;
             case MatchCondition.CardValueAndSuit:
-                return Value == comparisonCard.Value && Suit == comparisonCard.Suit;
+                 comparisonResult = Value == comparisonCard.Value && Suit == comparisonCard.Suit;
+                break;
         }
-        return false;
+        return  comparisonResult;
     }
 
     public override string ToString()

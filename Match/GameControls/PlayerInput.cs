@@ -1,6 +1,8 @@
-using static Match.Domain.Constants;
+using Match.Domain;
+using static Match.GameControls.Constants.Questions;
+using static Match.GameControls.Constants.Responses;
 
-namespace Match.Domain;
+namespace Match.GameControls;
 
 public class PlayerInput
 {

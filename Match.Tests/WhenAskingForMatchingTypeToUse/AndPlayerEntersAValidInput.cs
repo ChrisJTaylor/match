@@ -3,9 +3,10 @@ using System.IO;
 using System.Text;
 using FluentAssertions;
 using Match.Domain;
+using Match.GameControls;
 using Moq;
 using NUnit.Framework;
-using static Match.Domain.Constants;
+using static Match.GameControls.Constants.Questions;
 
 namespace Match.Tests.WhenAskingForMatchingTypeToUse;
 
