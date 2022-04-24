@@ -13,8 +13,8 @@ public class WhenSettingUpAGame
         var options = new GameOptions(numberOfPacks, selectedMatchCondition);
         var game = new Game(options);
         
-        var cards = new Cards();
-        var expectedCount = numberOfPacks * Cards.Pack.Length;
+        var cards = new Pack();
+        var expectedCount = numberOfPacks * Pack.Cards.Length;
         
         game.Deck.Should().HaveCount(expectedCount);
     }

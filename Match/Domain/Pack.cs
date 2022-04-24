@@ -1,25 +1,21 @@
 namespace Match.Domain;
 
-public class Cards
+public class Pack
 {
-    static Cards()
+    static Pack()
     {
-        Pack = BuildPackOfCards().ToArray();
+        Cards = BuildPackOfCards().ToArray();
     }
     
-    public static Card[] Pack { get; }
+    public static Card[] Cards { get; }
 
     public static IEnumerable<CardSuitEnum> Suits => new[] { CardSuitEnum.Clubs, CardSuitEnum.Diamonds };
     public static IEnumerable<CardValueEnum> Values => new[] { CardValueEnum.One, CardValueEnum.Two, CardValueEnum.Three };
 
     private static IEnumerable<Card> BuildPackOfCards()
     {
-        foreach (var suit in Suits)
-        {
-            foreach (var value in Values)
-            {
-                yield return new Card(value, suit);
-            } 
-        }
+        return from suit in Suits
+            from value in Values
+            select new Card(value, suit);
     }
 }

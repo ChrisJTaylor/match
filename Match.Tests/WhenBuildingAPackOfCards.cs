@@ -9,7 +9,7 @@ public class WhenBuildingAPackOfCards
     [Test]
     public void ItShouldContainTheExpectedNumberOfCards()
     {
-        Cards.Pack.Should().HaveCount(6);
+        Pack.Cards.Should().HaveCount(6);
     }
 
     [Test]
@@ -21,7 +21,7 @@ public class WhenBuildingAPackOfCards
             CardSuitEnum.Diamonds
         };
 
-        Cards.Suits.Should().BeEquivalentTo(expectedSuits);
+        Pack.Suits.Should().BeEquivalentTo(expectedSuits);
     }
 
     [Test]
@@ -34,6 +34,6 @@ public class WhenBuildingAPackOfCards
             CardValueEnum.Three
         };
 
-        Cards.Values.Should().BeEquivalentTo( expectedValues);
+        Pack.Values.Should().BeEquivalentTo(expectedValues);
     }
 }
