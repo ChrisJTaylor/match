@@ -6,9 +6,21 @@ public class Game
     public Game()
     {
         Deck = Array.Empty<Card>();
+        Players = BuildPlayers();
+    }
+
+    private static Player[] BuildPlayers()
+    {
+        return new[]
+        {
+            new Player("Jack"),
+            new Player("Jill")
+        };
     }
     
     public Card[] Deck { get; private set; }
+    public Player[] Players { get; set; }
+
     public void SetupNewGameWithOptions(GameOptions selectedOptions)
     {
         Deck = BuildDeckWith(numberOfPacks: selectedOptions.NumberOfPacksToUse);
