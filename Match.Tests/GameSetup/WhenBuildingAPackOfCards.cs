@@ -2,7 +2,7 @@ using FluentAssertions;
 using Match.Domain;
 using NUnit.Framework;
 
-namespace Match.Tests;
+namespace Match.Tests.GameSetup;
 
 public class WhenBuildingAPackOfCards
 {

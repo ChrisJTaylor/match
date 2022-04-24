@@ -3,7 +3,7 @@ using Match.Domain;
 using Match.GameRoutine;
 using NUnit.Framework;
 
-namespace Match.Tests;
+namespace Match.Tests.GameSetup;
 
 public class WhenSettingUpAGame
 {

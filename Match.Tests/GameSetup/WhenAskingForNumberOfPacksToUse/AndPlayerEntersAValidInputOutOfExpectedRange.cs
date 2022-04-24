@@ -8,13 +8,13 @@ using NUnit.Framework;
 using static Match.GameControls.Constants.Questions;
 using static Match.GameControls.Constants.Responses;
 
-namespace Match.Tests.WhenAskingForMatchingTypeToUse;
+namespace Match.Tests.GameSetup.WhenAskingForNumberOfPacksToUse;
 
 public class AndPlayerEntersAValidInputOutOfExpectedRange
 {
     private StringBuilder _consoleOut;
-
     private Exception _caughtException;
+    
     [OneTimeSetUp]
     public void Setup()
     {
@@ -28,7 +28,7 @@ public class AndPlayerEntersAValidInputOutOfExpectedRange
 
         try
         {
-            _ = playerInput.AskPlayerWhichMatchingTypeToUse();
+            _ = playerInput.AskPlayerHowManyPacksOfCardsToUse();
         }
         catch (Exception e)
         {
@@ -39,7 +39,7 @@ public class AndPlayerEntersAValidInputOutOfExpectedRange
     [Test]
     public void ItShouldAskThePlayerTheExpectedQuestion()
     {
-        _consoleOut.ToString().Should().Contain(WhichMatchingTypeWouldYouLikeToUse);
+        _consoleOut.ToString().Should().Contain(HowManyPacksOfCardsToUse);
     }
 
     [Test]
@@ -52,6 +52,6 @@ public class AndPlayerEntersAValidInputOutOfExpectedRange
     [Test]
     public void TheExceptionShouldHaveTheExpectedMessage()
     {
-        _caughtException.Message.Should().Be(YouMustEnterANumberBetween1And3);
+        _caughtException.Message.Should().Be(YouMustEnterANumberBetween1And9);
     }
 }

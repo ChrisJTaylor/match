@@ -8,7 +8,7 @@ using Moq;
 using NUnit.Framework;
 using static Match.GameControls.Constants.Questions;
 
-namespace Match.Tests.WhenAskingForMatchingTypeToUse;
+namespace Match.Tests.GameSetup.WhenAskingForMatchingTypeToUse;
 
 public class AndPlayerEntersAValidInput
 {

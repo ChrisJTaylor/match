@@ -7,7 +7,7 @@ using Moq;
 using NUnit.Framework;
 using static Match.GameControls.Constants.Questions;
 
-namespace Match.Tests.WhenAskingForNumberOfPacksToUse;
+namespace Match.Tests.GameSetup.WhenAskingForNumberOfPacksToUse;
 
 public class AndPlayerEntersAValidInput
 {
