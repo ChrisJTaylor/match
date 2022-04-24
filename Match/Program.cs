@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Match.Domain;
 using Match.GameControls;
+using Match.GameRoutine;
 using SimpleInjector;
 
 namespace Match;
@@ -19,8 +20,10 @@ internal class Program
             var numberOfPacks = playerInput.AskPlayerHowManyPacksOfCardsToUse();
             Console.WriteLine();
             
-            var matchingType = playerInput.AskPlayerWhichMatchingTypeToUse();
+            var matchCondition = playerInput.AskPlayerWhichMatchingTypeToUse();
             Console.WriteLine();
+
+            var gameOptions = new GameOptions(numberOfPacks, matchCondition);
         }
         catch (InvalidInputException e)
         {

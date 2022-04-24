@@ -10,10 +10,11 @@ public class WhenSettingUpAGame
     [TestCaseSource(nameof(GameSetupTestCases))]
     public void TheSelectedOptionsShouldBeApplied(int numberOfPacks, MatchCondition selectedMatchCondition)
     {
-        var options = new GameOptions(numberOfPacks, selectedMatchCondition);
-        var game = new Game(options);
+        var game = new Game();
         
-        var cards = new Pack();
+        var options = new GameOptions(numberOfPacks, selectedMatchCondition);
+        game.SetupNewGameWithOptions(options);
+        
         var expectedCount = numberOfPacks * Pack.Cards.Length;
         
         game.Deck.Should().HaveCount(expectedCount);
