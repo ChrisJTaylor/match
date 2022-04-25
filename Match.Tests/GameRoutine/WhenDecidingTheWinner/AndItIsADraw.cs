@@ -1,4 +1,5 @@
 using System;
+using AutoFixture;
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
@@ -40,10 +41,14 @@ public class AndItIsADraw
                 player1, player2 
             });
         
-        var game = new Game(deckBuilder.Object, playerBuilder.Object);
+        var fixture = new Fixture();
+        fixture.Register(() => deckBuilder.Object);
+        fixture.Register(() => playerBuilder.Object);
+        var game = fixture.Create<Game>();
+        
         game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
 
-        var adjudicator = new Adjudicator();
+        var adjudicator = fixture.Create<Adjudicator>();
 
         _winner = adjudicator.DetermineTheWinnerOfTheGame(game);
     }

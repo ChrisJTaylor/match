@@ -1,4 +1,5 @@
 using System.Linq;
+using AutoFixture;
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
@@ -33,7 +34,10 @@ public class AndAMatchIsDeclared
             builder.BuildDeckUsingNumberOfPacks(It.IsAny<int>()))
             .Returns(_cardCollection);
 
-        _game = new Game(deckBuilder.Object, new PlayerBuilder());
+        var fixture = new Fixture();
+        fixture.Register(() => deckBuilder.Object);
+        fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
+        _game = fixture.Create<Game>();
         
         _game.PlayNewGameWithOptions(new GameOptions(1, Suit));
     }

@@ -1,30 +1,32 @@
 using System;
 using System.IO;
 using System.Text;
+using AutoFixture;
 using FluentAssertions;
 using Match.Domain.GameControls;
 using Moq;
 using NUnit.Framework;
 using static Match.Domain.GameControls.Constants.Questions;
 using static Match.Domain.GameControls.Constants.Responses;
+using static Match.Tests.GameSetup.TestHelpers.KeyboardInputHelperExtensions;
 
 namespace Match.Tests.GameSetup.WhenAskingForMatchingTypeToUse;
 
 public class AndPlayerEntersAValidInputOutOfExpectedRange
 {
-    private StringBuilder _consoleOut = new();
+    private readonly StringBuilder _consoleOut = new();
     private Exception? _caughtException;
     
     [OneTimeSetUp]
     public void Setup()
     {
         var keyboardInput = new Mock<IKeyboardInput>();
-        var number0 = new ConsoleKeyInfo('0', ConsoleKey.NumPad0, false, false, false);
-        keyboardInput.Setup(key => key.ReceiveInput()).Returns(number0);
-        
-        _consoleOut = new StringBuilder();
-        var consoleWriter = new StringWriter(_consoleOut);
-        var playerInput = new PlayerInput(consoleWriter, keyboardInput.Object);
+        keyboardInput.Setup(key => key.ReceiveInput()).Returns(KeyFor('0'));
+
+        var fixture = new Fixture();
+        fixture.Register(() => keyboardInput.Object);
+        fixture.Register<TextWriter>(() => new StringWriter(_consoleOut));
+        var playerInput = fixture.Create<PlayerInput>(); 
 
         try
         {
