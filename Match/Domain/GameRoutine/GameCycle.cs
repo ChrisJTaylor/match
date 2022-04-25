@@ -1,13 +1,16 @@
+using Match.Domain.Cards;
 using static Match.Domain.GameSetup.Utility;
 
 namespace Match.Domain.GameRoutine;
 public class GameCycle
 {
     private readonly IGameState _gameState;
+    private readonly Random _random;
     
     public GameCycle(IGameState gameState)
     {
         _gameState = gameState;
+        _random = GetRandomiser();
     }
 
     public void PlayRound()
@@ -20,19 +23,22 @@ public class GameCycle
         var cardInPlay = _gameState.Deck.Pop();
         _gameState.Pile.Push(cardInPlay);
 
-        if (cardInPlay.IsAMatchFor(previousCard, _gameState.Options.SelectedMatchingCondition))
+        if (ListenForMatchDeclarations(out var player) 
+            && TheCardsMatch(cardInPlay, previousCard))
         {
-            var player = ListenForMatchDeclarations();
-            if (player.HasValue)
-            {
-                Console.WriteLine(player.Value.Name);
-                player?.Winnings.AddRange(_gameState.Pile.ToArray());
-                _gameState.Pile.Clear();
-            }
+            player.Winnings.AddRange(_gameState.Pile.ToArray());
+            _gameState.Pile.Clear();
         }
     }
-    private Player? ListenForMatchDeclarations()
+
+    private bool TheCardsMatch(Card cardInPlay, Card previousCard)
     {
-        return _gameState.Players[GetRandomiser().Next(0, _gameState.Players.Length)];
+        return cardInPlay.IsAMatchFor(previousCard, _gameState.Options.SelectedMatchingCondition);
+    }
+
+    private bool ListenForMatchDeclarations(out Player playerDeclaringMatch)
+    {
+        playerDeclaringMatch = _gameState.Players[_random.Next(0, _gameState.Players.Length)];
+        return true;
     }
 }

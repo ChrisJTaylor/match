@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using AutoFixture;
 using FluentAssertions;
 using Match.Domain;
@@ -15,7 +17,7 @@ namespace Match.Tests.GameRoutine.WhenDecidingTheWinner;
 
 public class AndItIsADraw
 {
-    private string _winner;
+    private readonly StringBuilder _consoleOut = new();
 
     [OneTimeSetUp]
     public void WhenBothPlayersHaveTheSameScore()
@@ -26,8 +28,8 @@ public class AndItIsADraw
             .Returns(Array.Empty<Card>());
 
         var player1 = new Player("Bill");
-        player1.Winnings.Add(new Card(One, Diamonds));
-        player1.Winnings.Add(new Card(One, Diamonds));
+        player1.Winnings.Add(new Card(Ace, Diamonds));
+        player1.Winnings.Add(new Card(Ace, Diamonds));
         
         var player2 = new Player("Ben");
         player2.Winnings.Add(new Card(Three, Clubs));
@@ -44,6 +46,7 @@ public class AndItIsADraw
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register(() => playerBuilder.Object);
+        fixture.Register<TextWriter>(() => new StringWriter(_consoleOut));
         var gameState = fixture.Create<GameState>();
         fixture.Register<IGameState>(() => gameState);
         
@@ -51,12 +54,12 @@ public class AndItIsADraw
         game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
 
         var adjudicator = fixture.Create<Adjudicator>();
-        _winner = adjudicator.DeclareTheResult();
+        adjudicator.DeclareTheResult();
     }
 
     [Test]
-    public void ItShouldDeclareNoOneIsTheWinner()
+    public void ItShouldDeclareTheGameADraw()
     {
-        _winner.Should().Be("no one");
+        _consoleOut.ToString().Should().Contain($"The game is a draw!");
     }
 }

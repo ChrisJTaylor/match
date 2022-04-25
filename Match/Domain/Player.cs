@@ -2,7 +2,7 @@ using Match.Domain.Cards;
 
 namespace Match.Domain;
 
-public struct Player
+public class Player
 {
     public Player(string name)
     {

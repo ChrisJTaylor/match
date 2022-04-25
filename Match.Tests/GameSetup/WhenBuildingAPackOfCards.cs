@@ -2,6 +2,8 @@ using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
 using NUnit.Framework;
+using static Match.Domain.Cards.CardSuits;
+using static Match.Domain.Cards.CardValues;
 
 namespace Match.Tests.GameSetup;
 
@@ -10,7 +12,7 @@ public class WhenBuildingAPackOfCards
     [Test]
     public void ItShouldContainTheExpectedNumberOfCards()
     {
-        Pack.Cards.Should().HaveCount(6);
+        Pack.Cards.Should().HaveCount(52);
     }
 
     [Test]
@@ -18,8 +20,7 @@ public class WhenBuildingAPackOfCards
     {
         var expectedSuits = new[]
         {
-            CardSuits.Clubs,
-            CardSuits.Diamonds
+            Clubs, Diamonds, Hearts, Spades
         };
 
         Pack.Suits.Should().BeEquivalentTo(expectedSuits);
@@ -30,9 +31,7 @@ public class WhenBuildingAPackOfCards
     {
         var expectedValues = new[]
         {
-            CardValues.One,
-            CardValues.Two,
-            CardValues.Three
+            Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
         };
 
         Pack.Values.Should().BeEquivalentTo(expectedValues);

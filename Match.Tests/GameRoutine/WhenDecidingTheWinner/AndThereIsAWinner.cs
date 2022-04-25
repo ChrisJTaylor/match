@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using AutoFixture;
 using FluentAssertions;
 using Match.Domain;
@@ -15,7 +17,7 @@ namespace Match.Tests.GameRoutine.WhenDecidingTheWinner;
 
 public class AndThereIsAWinner
 {
-    private string _winner;
+    private readonly StringBuilder _consoleOut = new();
     
     [OneTimeSetUp]
     public void WhenBothPlayersHaveTheSameScore()
@@ -28,8 +30,8 @@ public class AndThereIsAWinner
             .Returns(Array.Empty<Card>());
 
         var player1 = new Player("Bill");
-        player1.Winnings.Add(new Card(One, Diamonds));
-        player1.Winnings.Add(new Card(One, Diamonds));
+        player1.Winnings.Add(new Card(Ace, Diamonds));
+        player1.Winnings.Add(new Card(Ace, Diamonds));
         
         var player2 = new Player("Ben");
 
@@ -44,6 +46,7 @@ public class AndThereIsAWinner
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register(() => playerBuilder.Object);
+        fixture.Register<TextWriter>(() => new StringWriter(_consoleOut));
         var gameState = fixture.Create<GameState>();
         fixture.Register<IGameState>(() => gameState);
         
@@ -52,12 +55,12 @@ public class AndThereIsAWinner
 
         var adjudicator = fixture.Create<Adjudicator>();
 
-        _winner = adjudicator.DeclareTheResult();
+        adjudicator.DeclareTheResult();
     }
 
     [Test]
     public void ItShouldDeclareTheExpectedWinner()
     {
-        _winner.Should().Be("Bill");
+        _consoleOut.ToString().Should().Contain("Bill is the winner!");
     }
 }

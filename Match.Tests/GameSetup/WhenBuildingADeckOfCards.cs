@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
@@ -21,8 +23,14 @@ public class WhenBuildingADeckOfCards
     {
         var deckBuilder = new DeckBuilder();
         var deck = deckBuilder.BuildDeckUsingNumberOfPacks(numberOfPacks);
+
+        var totalCards = new List<Card>();
+        foreach (var _ in Enumerable.Range(1, numberOfPacks))
+        {
+            totalCards.AddRange(Pack.Cards);
+        }
         
-        var expectedCount = numberOfPacks * Pack.Cards.Length;
-        deck.Should().HaveCount(expectedCount);
+        deck.Should().HaveCount(totalCards.Count);
+        deck.Should().NotContainInOrder(totalCards);
     }
 }

@@ -22,15 +22,15 @@ public class ByValue
     
     static object[] MatchingCardTestCases =
     {
-        new object[] { new Card(CardValues.One, CardSuits.Clubs), new Card(CardValues.One, CardSuits.Diamonds) },
+        new object[] { new Card(CardValues.Ace, CardSuits.Clubs), new Card(CardValues.Ace, CardSuits.Diamonds) },
         new object[] { new Card(CardValues.Two, CardSuits.Clubs), new Card(CardValues.Two, CardSuits.Diamonds) },
         new object[] { new Card(CardValues.Three, CardSuits.Diamonds), new Card(CardValues.Three, CardSuits.Clubs) }
     };
     
     static object[] MismatchingCardTestCases =
     {
-        new object[] { new Card(CardValues.One, CardSuits.Clubs), new Card(CardValues.Three, CardSuits.Diamonds) },
-        new object[] { new Card(CardValues.Two, CardSuits.Clubs), new Card(CardValues.One, CardSuits.Diamonds) },
+        new object[] { new Card(CardValues.Ace, CardSuits.Clubs), new Card(CardValues.Three, CardSuits.Diamonds) },
+        new object[] { new Card(CardValues.Two, CardSuits.Clubs), new Card(CardValues.Ace, CardSuits.Diamonds) },
         new object[] { new Card(CardValues.Three, CardSuits.Diamonds), new Card(CardValues.Two, CardSuits.Clubs) }
     };
 }

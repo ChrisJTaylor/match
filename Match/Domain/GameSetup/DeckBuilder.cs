@@ -12,6 +12,7 @@ public class DeckBuilder : IDeckBuilder
             deck.AddRange(Pack.Cards);
         }
 
-        return deck.ToArray();
+        var rnd = Utility.GetRandomiser();
+        return deck.OrderBy(card => rnd.Next()).ToArray();
     }
 }

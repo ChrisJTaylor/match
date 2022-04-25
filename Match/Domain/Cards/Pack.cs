@@ -14,11 +14,11 @@ public static class Pack
 
     public static IEnumerable<CardSuits> Suits => new[]
     {
-        Clubs, Diamonds
+        Clubs, Diamonds, Spades, Hearts
     };
     public static IEnumerable<CardValues> Values => new[]
     {
-        One, Two, Three
+        Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King
     };
 
     private static IEnumerable<Card> BuildPackOfCards()

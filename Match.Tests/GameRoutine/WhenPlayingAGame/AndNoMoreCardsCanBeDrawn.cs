@@ -1,3 +1,4 @@
+using System;
 using AutoFixture;
 using FluentAssertions;
 using Match.Domain;
@@ -24,7 +25,7 @@ public class AndNoMoreCardsCanBeDrawn
         
         _cardCollection = new[]
         {
-            new Card(One, Clubs),
+            new Card(Ace, Clubs),
             new Card(Three, Diamonds)
         };
         
@@ -36,10 +37,11 @@ public class AndNoMoreCardsCanBeDrawn
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
+        fixture.Register(() => Console.Out);
         _gameState = fixture.Create<GameState>();
         fixture.Register(() => _gameState);
-        
         var game = fixture.Create<Game>(); 
+        
         game.PlayNewGameWithOptions(selectedOptions);
     }
 

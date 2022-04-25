@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using System.Linq;
 using AutoFixture;
 using FluentAssertions;
@@ -26,11 +28,11 @@ public class AndAMatchIsDeclared
         
         _cardCollection = new[]
         {
-            new Card(One, Diamonds),
+            new Card(Ace, Diamonds),
             new Card(Three, Clubs),
             new Card(Two, Diamonds),
             new Card(Three, Diamonds),
-            new Card(One, Clubs)
+            new Card(Ace, Clubs)
         };
         
         var deckBuilder = new Mock<IDeckBuilder>();
@@ -41,10 +43,11 @@ public class AndAMatchIsDeclared
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
+        fixture.Register(() => Console.Out);
         _gameState = fixture.Create<GameState>();
         fixture.Register(() => _gameState);
-
         var game = fixture.Create<Game>();
+        
         game.PlayNewGameWithOptions(selectedOptions);
     }
 
@@ -62,7 +65,7 @@ public class AndAMatchIsDeclared
         {
             new Card(Two, Diamonds),
             new Card(Three, Diamonds),
-            new Card(One, Clubs)
+            new Card(Ace, Clubs)
         });
     }
 }

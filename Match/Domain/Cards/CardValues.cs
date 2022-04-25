@@ -2,7 +2,17 @@ namespace Match.Domain.Cards;
 
 public enum CardValues {
     None,
-    One,
+    Ace,
     Two,
-    Three
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Ten,
+    Jack,
+    Queen,
+    King
 }
