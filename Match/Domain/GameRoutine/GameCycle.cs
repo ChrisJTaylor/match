@@ -38,7 +38,7 @@ public class GameCycle
 
     private bool ListenForMatchDeclarations(out Player playerDeclaringMatch)
     {
-        playerDeclaringMatch = _gameState.Players[_random.Next(0, _gameState.Players.Length)];
+        playerDeclaringMatch = _gameState.Players.OrderBy(_ => _random.Next()).First();
         return true;
     }
 }

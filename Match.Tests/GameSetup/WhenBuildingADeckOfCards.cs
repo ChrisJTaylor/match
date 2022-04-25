@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
-using Match.Domain;
 using Match.Domain.Cards;
 using Match.Domain.GameSetup;
 using NUnit.Framework;
+using static System.Linq.Enumerable;
 
 namespace Match.Tests.GameSetup;
 
@@ -25,7 +24,7 @@ public class WhenBuildingADeckOfCards
         var deck = deckBuilder.BuildDeckUsingNumberOfPacks(numberOfPacks);
 
         var totalCards = new List<Card>();
-        foreach (var _ in Enumerable.Range(1, numberOfPacks))
+        foreach (var _ in Range(1, numberOfPacks))
         {
             totalCards.AddRange(Pack.Cards);
         }
