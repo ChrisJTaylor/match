@@ -2,12 +2,12 @@ using Match.Domain.Cards;
 
 namespace Match.Domain;
 
-public class Player
+public struct Player
 {
     public Player(string name)
     {
         Name = name;
-        Winnings = Array.Empty<Card>();
+        Winnings = new List<Card>();
     }
     public string Name { get; }
     public IList<Card> Winnings { get; }

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
@@ -34,6 +35,6 @@ public class WhenBuildingPlayers
     [Test]
     public void PlayersShouldHaveAnEmptyPileOfWinnings()
     {
-        _players.Should().OnlyContain(player => player.Winnings == Array.Empty<Card>());
+        _players.Should().OnlyContain(player => player.Winnings.ToArray() == Array.Empty<Card>());
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Match.Domain;
 using Match.Domain.GameControls;
+using Match.Domain.GameRoutine;
 using Match.Domain.GameSetup;
 using SimpleInjector;
 
@@ -13,12 +14,19 @@ internal class Program
     static void Main(string[] args)
     {
         var game = Container.GetInstance<Game>();
+        var adjudicator = Container.GetInstance<Adjudicator>();
         
         try
         {
             var gameOptions = GetOptionsFromPlayerInput();
             
             game.StartNewGameWithOptions(gameOptions);
+
+            var winner = adjudicator.DetermineTheWinnerOfTheGame(game);
+            
+            Console.WriteLine();
+            Console.WriteLine($"The winner is {winner}");
+            Console.WriteLine();
         }
         catch (InvalidInputException e)
         {
@@ -37,8 +45,7 @@ internal class Program
         var matchCondition = playerInput.AskPlayerWhichMatchingConditionToUse();
         Console.WriteLine();
 
-        var gameOptions = new GameOptions(numberOfPacks, matchCondition);
-        return gameOptions;
+        return new GameOptions(numberOfPacks, matchCondition);
     }
 
     private static Container SetupIoC()
