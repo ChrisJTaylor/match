@@ -1,67 +1,36 @@
-# Zoopla Match! Task (Backend)
+# Instructions
 
-This test is intended to help us gauge your competency with a language as well as how you design/structure your code. We'd like to see your test in one of the following languages:
+## Prerequisites
 
-- Java
-- JavaScript/TypeScript
-- C#
-- Python
-- Perl
-- Go
+The solution is written in C# and uses .Net 6, so you will need to install this if you don't already have it.
 
-Please attempt the following at your own convenience but do not spend more than 1½ hours on it.  Once the 1½ hours is over and you've completed the test and sent your result back, please follow it up with some notes on how you thought the test went and anything you'd do differently, given more time. 
+[Install .Net 6 here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+### How to build
 
-## The task
+Type `dotnet build` in the solution root to restore the packages and build the solution.
 
-Write a program to simulate a card game called "Match!" between two computer players. 
+### How to run tests
 
-### "Match!" Game Rules
-#### Game Setup
-Choose a number of packs of [playing cards](https://en.wikipedia.org/wiki/Standard_52-card_deck), and combine them into a single *deck*. Shuffle the deck.
+Type `dotnet test` in the solution root to run all the unit tests in the solution.
 
-#### Playing the game
-Cards are played sequentially from the top of the deck into the *pile*. 
+## How to run the game
 
-If two cards played sequentially *match* (see "Match condition" below), the first player to declare "Match!" takes all the cards in the pile. *For the purposes of this simulation, the program should choose a random player as having declared "Match!" first.*
+Navigate to the `Match` application folder, then type `dotnet run`.
 
-Play then continues with the next card in the deck, starting a new pile. The game ends when no more cards can be drawn from the deck and no player can declare "Match!". (Any remaining cards in the pile may be discarded.)
+The game will ask you how many packs of cards you would like to build the game deck from, in a range of 1 to 9.
 
-The player that has taken the most cards is the winner. The game may end in a draw.
+The game will then ask you to select the matching condition to be used, from the following:
+- 1: Card Value
+- 2: Card Suit
+- 3: Card Value and Card Suit
 
-#### Match condition
+After the selections are complete, the game will run a simulation of a game between Jack and Jill.
+When they have played through all the cards in the Deck, the result will be displayed.
 
-The match condition determines when two cards *match* for the duration of the game. There are three options:
-                             
- - The **suits** of two cards must match
-     - Example: "3 of hearts" and "5 of hearts" match because they are both **hearts**.
- - The **values** of two cards must match
-     - Example: "7 of hearts" and "7 of clubs" match because they both have the value **7**.
- - **Both suit and value** must match 
-     - Example: "Jack of spades" **only matches** another "Jack of spades"
+### Notes on how I feel the Kata went
 
+I enjoyed building this solution as it is offers a lot of choice for approaches and design patterns. It would be interesting to try and Event Sourcing approach, and have various components react to the events as they are broadcast.
 
-### The program
-As input, the program should ask:
+I'm generally happy with how it went, although I had toyed for a while with building a Narrator class and using a decorator pattern to wrap it around the GameCycle, so I could decouple the console writes and bind test around them. I decided against it in the end, as in the context of the kata, the narration is purely presentation and so I don't feel it warrants the extra work.
 
-1. how many packs of cards to use for the deck
-1. which *match condition* to use
-
-It should then simulate the game.
-
-The program should output the results by either declaring the winner, or a draw.
-
----
-
-## Glossary
-
-**Pack** - A complete set of 52 playing cards.
-
-**Deck** - The set of cards in play. This could be multiple packs, or a subset of cards from a single pack depending on the game being played.
-
-**Value** - The number or title value associated with a card. EG "_one_", "_queen_" or "_ace_".
-
-**Suit** - A pack is divided into 4 suits. The possible suits are
- - "clubs" ♣️,
- - "diamonds" ♦️,
- - "hearts" ♥️, and
- - "spades" ♠️
+I will revisit this Kata in a couple of weeks time and run through it again with a different approach.
