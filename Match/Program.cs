@@ -14,19 +14,11 @@ internal class Program
     static void Main(string[] args)
     {
         var game = Container.GetInstance<Game>();
-        var adjudicator = Container.GetInstance<Adjudicator>();
         
         try
         {
             var gameOptions = GetOptionsFromPlayerInput();
-            
             game.PlayNewGameWithOptions(gameOptions);
-
-            var winner = adjudicator.DetermineTheWinner();
-            
-            Console.WriteLine();
-            Console.WriteLine($"The winner is {winner}");
-            Console.WriteLine();
         }
         catch (InvalidInputException e)
         {
@@ -54,8 +46,9 @@ internal class Program
         container.Options.ResolveUnregisteredConcreteTypes = true;
         container.Register<IKeyboardInput, KeyboardInput>();
         container.RegisterInstance(Console.Out);
-        container.Register<IDeckBuilder, DeckBuilder>();
-        container.Register<IPlayerBuilder, PlayerBuilder>();
+        container.Register<IDeckBuilder, DeckBuilder>(Lifestyle.Singleton);
+        container.Register<IPlayerBuilder, PlayerBuilder>(Lifestyle.Singleton);
+        container.Register<IGameState, GameState>(Lifestyle.Singleton);
         return container;
     }
 }

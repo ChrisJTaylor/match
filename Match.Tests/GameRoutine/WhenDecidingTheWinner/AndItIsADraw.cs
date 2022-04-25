@@ -51,7 +51,7 @@ public class AndItIsADraw
         game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
 
         var adjudicator = fixture.Create<Adjudicator>();
-        _winner = adjudicator.DetermineTheWinner();
+        _winner = adjudicator.DeclareTheResult();
     }
 
     [Test]

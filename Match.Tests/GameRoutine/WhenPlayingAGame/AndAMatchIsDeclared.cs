@@ -42,7 +42,7 @@ public class AndAMatchIsDeclared
         fixture.Register(() => deckBuilder.Object);
         fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
         _gameState = fixture.Create<GameState>();
-        fixture.Register<IGameState>(() => _gameState);
+        fixture.Register(() => _gameState);
 
         var game = fixture.Create<Game>();
         game.PlayNewGameWithOptions(selectedOptions);

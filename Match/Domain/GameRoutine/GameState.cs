@@ -19,12 +19,15 @@ public class GameState : IGameState
         Players = Array.Empty<Player>();
     }
 
+    public GameOptions Options { get; private set; }
     public Stack<Card> Deck { get; private set; }
     public Stack<Card> Pile { get; }
     public Player[] Players { get; private set; }
 
     public void InitialiseStateWithOptions(GameOptions selectedOptions)
     {
+        Options = selectedOptions;
+        
         Players = _playerBuilder.BuildPlayers();
         
         var deck =_deckBuilder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse);

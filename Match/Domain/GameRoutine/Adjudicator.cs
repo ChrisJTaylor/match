@@ -7,7 +7,7 @@ public class Adjudicator
     {
         _gameState = gameState;
     }
-    public string DetermineTheWinner()
+    public string DeclareTheResult()
     {
         return _gameState.Players.First().Winnings.Count == _gameState.Players.Last().Winnings.Count 
             ? "no one" 
