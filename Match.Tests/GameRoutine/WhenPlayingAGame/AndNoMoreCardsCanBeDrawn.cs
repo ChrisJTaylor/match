@@ -27,14 +27,7 @@ public class AndNoMoreCardsCanBeDrawn
             builder.BuildDeckUsingNumberOfPacks(1))
             .Returns(_cardCollection);
 
-        var playerBuilder = new Mock<IPlayerBuilder>();
-        playerBuilder.Setup(builder => builder.BuildPlayers()).Returns(new[]
-        {
-            new Player("Bill"),
-            new Player("Ben"),
-        });
-        
-        _game = new Game(deckBuilder.Object, playerBuilder.Object);
+        _game = new Game(deckBuilder.Object, new PlayerBuilder());
         
         _game.StartNewGameWithOptions(new GameOptions(1, MatchingCondition.CardValueAndSuit));
     }
