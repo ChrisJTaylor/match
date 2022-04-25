@@ -20,6 +20,8 @@ public class AndAMatchIsDeclared
     [OneTimeSetUp]
     public void WhenAGameHasAMatchingPair()
     {
+        var selectedOptions = new GameOptions(1, Suit);
+        
         _cardCollection = new[]
         {
             new Card(One, Diamonds),
@@ -31,15 +33,15 @@ public class AndAMatchIsDeclared
         
         var deckBuilder = new Mock<IDeckBuilder>();
         deckBuilder.Setup(builder => 
-            builder.BuildDeckUsingNumberOfPacks(It.IsAny<int>()))
+            builder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse))
             .Returns(_cardCollection);
 
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
         _game = fixture.Create<Game>();
-        
-        _game.PlayNewGameWithOptions(new GameOptions(1, Suit));
+
+        _game.PlayNewGameWithOptions(selectedOptions);
     }
 
     [Test]

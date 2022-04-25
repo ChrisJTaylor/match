@@ -19,6 +19,8 @@ public class AndNoMoreCardsCanBeDrawn
     [OneTimeSetUp]
     public void WhenAGameIsComingToAClose()
     {
+        var selectedOptions = new GameOptions(1, CardValueAndSuit);
+        
         _cardCollection = new[]
         {
             new Card(One, Clubs),
@@ -27,15 +29,15 @@ public class AndNoMoreCardsCanBeDrawn
         
         var deckBuilder = new Mock<IDeckBuilder>();
         deckBuilder.Setup(builder => 
-            builder.BuildDeckUsingNumberOfPacks(1))
+            builder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse))
             .Returns(_cardCollection);
 
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
         _game = fixture.Create<Game>();
-        
-        _game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
+
+        _game.PlayNewGameWithOptions(selectedOptions);
     }
 
     [Test]
