@@ -15,20 +15,14 @@ public struct Card
 
     public bool IsAMatchFor(Card comparisonCard, MatchingCondition matchingBy)
     {
-        var comparisonResult = false;
-        switch (matchingBy)
+        var comparisonResult = matchingBy switch
         {
-            case MatchingCondition.CardValue:
-                 comparisonResult = Value == comparisonCard.Value;
-                break;
-            case MatchingCondition.Suit:
-                 comparisonResult = Suit == comparisonCard.Suit;
-                break;
-            case MatchingCondition.CardValueAndSuit:
-                 comparisonResult = Value == comparisonCard.Value && Suit == comparisonCard.Suit;
-                break;
-        }
-        return  comparisonResult;
+            MatchingCondition.CardValue => Value == comparisonCard.Value,
+            MatchingCondition.Suit => Suit == comparisonCard.Suit,
+            MatchingCondition.CardValueAndSuit => Value == comparisonCard.Value && Suit == comparisonCard.Suit,
+            _ => false
+        };
+        return comparisonResult;
     }
 
     public override string ToString()
