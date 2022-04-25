@@ -2,11 +2,16 @@ namespace Match.Domain.GameRoutine;
 
 public class Adjudicator
 {
-    public string DetermineTheWinnerOfTheGame(Game game)
+    private readonly IGameState _gameState;
+    public Adjudicator(IGameState gameState)
     {
-        return game.Players.First().Winnings.Count == game.Players.Last().Winnings.Count 
+        _gameState = gameState;
+    }
+    public string DetermineTheWinner()
+    {
+        return _gameState.Players.First().Winnings.Count == _gameState.Players.Last().Winnings.Count 
             ? "no one" 
-            : game.Players.OrderByDescending(player => 
+            : _gameState.Players.OrderByDescending(player => 
                 player.Winnings.Count).First().Name;
     }
 }

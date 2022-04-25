@@ -2,6 +2,7 @@ using AutoFixture;
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
+using Match.Domain.GameRoutine;
 using Match.Domain.GameSetup;
 using Moq;
 using NUnit.Framework;
@@ -13,7 +14,7 @@ namespace Match.Tests.GameRoutine.WhenPlayingAGame;
 
 public class AndNoMoreCardsCanBeDrawn
 {
-    private Game _game;
+    private IGameState _gameState;
     private Card[] _cardCollection;
     
     [OneTimeSetUp]
@@ -35,20 +36,22 @@ public class AndNoMoreCardsCanBeDrawn
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
-        _game = fixture.Create<Game>();
-
-        _game.PlayNewGameWithOptions(selectedOptions);
+        _gameState = fixture.Create<GameState>();
+        fixture.Register(() => _gameState);
+        
+        var game = fixture.Create<Game>(); 
+        game.PlayNewGameWithOptions(selectedOptions);
     }
 
     [Test]
     public void ItShouldHaveNoMoreCardsInTheDeck()
     {
-        _game.Deck.Should().BeEmpty();
+        _gameState.Deck.Should().BeEmpty();
     }
     
     [Test]
     public void ItShouldPopulateThePileFromCardsTakenFromTheDeck()
     {
-        _game.Pile.Should().ContainInOrder(_cardCollection);
+        _gameState.Pile.Should().ContainInOrder(_cardCollection);
     }
 }

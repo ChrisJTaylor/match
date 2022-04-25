@@ -22,7 +22,7 @@ internal class Program
             
             game.PlayNewGameWithOptions(gameOptions);
 
-            var winner = adjudicator.DetermineTheWinnerOfTheGame(game);
+            var winner = adjudicator.DetermineTheWinner();
             
             Console.WriteLine();
             Console.WriteLine($"The winner is {winner}");
@@ -53,7 +53,7 @@ internal class Program
         var container = new Container();
         container.Options.ResolveUnregisteredConcreteTypes = true;
         container.Register<IKeyboardInput, KeyboardInput>();
-        container.RegisterInstance<TextWriter>(Console.Out);
+        container.RegisterInstance(Console.Out);
         container.Register<IDeckBuilder, DeckBuilder>();
         container.Register<IPlayerBuilder, PlayerBuilder>();
         return container;

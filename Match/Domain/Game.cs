@@ -1,34 +1,20 @@
-using Match.Domain.Cards;
+using Match.Domain.GameRoutine;
 using Match.Domain.GameSetup;
 
 namespace Match.Domain;
 public class Game
 {
-    private readonly IDeckBuilder _deckBuilder;
-    private readonly IPlayerBuilder _playerBuilder;
+    private readonly IGameState _gameState;
 
-    public Game(IDeckBuilder deckBuilder, IPlayerBuilder playerBuilder)
+    public Game(IGameState gameState)
     {
-        _deckBuilder = deckBuilder;
-        _playerBuilder = playerBuilder;
-
-        Deck = new Stack<Card>();
-        Pile = new Stack<Card>();
-
-        Players = Array.Empty<Player>();
+        _gameState = gameState;
     }
     
-    public Stack<Card> Deck { get; private set; }
-    public Player[] Players { get; private set; }
-    public Stack<Card> Pile { get; }
-
     public void PlayNewGameWithOptions(GameOptions selectedOptions)
     {
-        Players = _playerBuilder.BuildPlayers();
+        _gameState.InitialiseStateWithOptions(selectedOptions);
         
-        var deck =_deckBuilder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse);
-        Deck = new Stack<Card>(deck);
-
         while (GameCanContinue())
         {
             PlayRound(selectedOptions);
@@ -37,34 +23,32 @@ public class Game
 
     private void PlayRound(GameOptions selectedOptions)
     {
-        if (Pile.TryPeek(out var previousCard))
+        if (_gameState.Pile.TryPeek(out var previousCard))
         {
-            previousCard = Pile.Peek();
+            previousCard = _gameState.Pile.Peek();
         }
 
-        var cardInPlay = Deck.Pop();
-        Pile.Push(cardInPlay);
+        var cardInPlay = _gameState.Deck.Pop();
+        _gameState.Pile.Push(cardInPlay);
 
-        if (cardInPlay.IsAMatchFor(previousCard, selectedOptions.SelectedMatchingCondition))
-        {
-            var player = ListenForMatchDeclarations();
-            if (player.HasValue)
-            {
-                Console.WriteLine(player.Value.Name);
-                player?.Winnings.AddRange(Pile.ToArray());
-                Pile.Clear();
-            }
-        }
+        if (!cardInPlay.IsAMatchFor(previousCard, selectedOptions.SelectedMatchingCondition)) return;
+        
+        var player = ListenForMatchDeclarations();
+        if (!player.HasValue) return;
+            
+        Console.WriteLine(player.Value.Name);
+        player?.Winnings.AddRange(_gameState.Pile.ToArray());
+        _gameState.Pile.Clear();
     }
 
     private Player? ListenForMatchDeclarations()
     {
         var rnd = new Random(DateTime.Now.Millisecond);
-        return Players[rnd.Next(0, Players.Length)];
+        return _gameState.Players[rnd.Next(0, _gameState.Players.Length)];
     }
 
     private bool GameCanContinue()
     {
-        return Deck.Count > 0;
+        return _gameState.Deck.Count > 0;
     }
 }

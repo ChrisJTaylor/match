@@ -20,9 +20,11 @@ public class AndThereIsAWinner
     [OneTimeSetUp]
     public void WhenBothPlayersHaveTheSameScore()
     {
+        var selectedOptions = new GameOptions(1, CardValueAndSuit);
+        
         var deckBuilder = new Mock<IDeckBuilder>();
         deckBuilder.Setup(builder => 
-            builder.BuildDeckUsingNumberOfPacks(1))
+            builder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse))
             .Returns(Array.Empty<Card>());
 
         var player1 = new Player("Bill");
@@ -42,12 +44,15 @@ public class AndThereIsAWinner
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register(() => playerBuilder.Object);
+        var gameState = fixture.Create<GameState>();
+        fixture.Register<IGameState>(() => gameState);
+        
         var game = fixture.Create<Game>();
-        game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
+        game.PlayNewGameWithOptions(selectedOptions);
 
         var adjudicator = fixture.Create<Adjudicator>();
 
-        _winner = adjudicator.DetermineTheWinnerOfTheGame(game);
+        _winner = adjudicator.DetermineTheWinner();
     }
 
     [Test]

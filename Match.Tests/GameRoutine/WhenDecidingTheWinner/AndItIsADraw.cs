@@ -16,7 +16,7 @@ namespace Match.Tests.GameRoutine.WhenDecidingTheWinner;
 public class AndItIsADraw
 {
     private string _winner;
-    
+
     [OneTimeSetUp]
     public void WhenBothPlayersHaveTheSameScore()
     {
@@ -44,13 +44,14 @@ public class AndItIsADraw
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register(() => playerBuilder.Object);
-        var game = fixture.Create<Game>();
+        var gameState = fixture.Create<GameState>();
+        fixture.Register<IGameState>(() => gameState);
         
+        var game = fixture.Create<Game>();
         game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
 
         var adjudicator = fixture.Create<Adjudicator>();
-
-        _winner = adjudicator.DetermineTheWinnerOfTheGame(game);
+        _winner = adjudicator.DetermineTheWinner();
     }
 
     [Test]

@@ -3,6 +3,7 @@ using AutoFixture;
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
+using Match.Domain.GameRoutine;
 using Match.Domain.GameSetup;
 using Moq;
 using NUnit.Framework;
@@ -14,7 +15,8 @@ namespace Match.Tests.GameRoutine.WhenPlayingAGame;
 
 public class AndAMatchIsDeclared
 {
-    private Game _game;
+    private IGameState _gameState;
+    
     private Card[] _cardCollection;
     
     [OneTimeSetUp]
@@ -39,21 +41,23 @@ public class AndAMatchIsDeclared
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
         fixture.Register<IPlayerBuilder>(() => new PlayerBuilder());
-        _game = fixture.Create<Game>();
+        _gameState = fixture.Create<GameState>();
+        fixture.Register<IGameState>(() => _gameState);
 
-        _game.PlayNewGameWithOptions(selectedOptions);
+        var game = fixture.Create<Game>();
+        game.PlayNewGameWithOptions(selectedOptions);
     }
 
     [Test]
     public void ItShouldHaveNoMoreCardsInTheDeck()
     {
-        _game.Deck.Should().BeEmpty();
+        _gameState.Deck.Should().BeEmpty();
     }
     
     [Test]
     public void TheDeclaringPlayerShouldWinTheAccruedCardsInThePile()
     {
-        var declaringPlayer = _game.Players.First(player => player.Winnings.Count > 0);
+        var declaringPlayer = _gameState.Players.First(player => player.Winnings.Count > 0);
         declaringPlayer.Winnings.Should().ContainInOrder(new[]
         {
             new Card(Two, Diamonds),
