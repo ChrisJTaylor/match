@@ -20,7 +20,7 @@ internal class Program
         {
             var gameOptions = GetOptionsFromPlayerInput();
             
-            game.StartNewGameWithOptions(gameOptions);
+            game.PlayNewGameWithOptions(gameOptions);
 
             var winner = adjudicator.DetermineTheWinnerOfTheGame(game);
             

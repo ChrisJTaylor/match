@@ -21,8 +21,7 @@ public class PlayerInput
 
         var key = _keyboardInput.ReceiveInput();
 
-        if (int.TryParse(key.KeyChar.ToString(), out var numberOfPacks) 
-            && numberOfPacks.IsBetween(1, to: 9))
+        if (PlayerSelectedAValidNumberOfPacks(key, out var numberOfPacks))
         {
             return numberOfPacks;
         }
@@ -36,13 +35,23 @@ public class PlayerInput
         
         var key = _keyboardInput.ReceiveInput();
 
-        if (int.TryParse(key.KeyChar.ToString(), out var matchingType)
-            && matchingType.IsBetween(1, to: 3))
+        if (PlayerEnteredAValidMatchingCondition(key, out var matchingCondition))
         {
-            return (MatchingCondition)matchingType;
+            return (MatchingCondition)matchingCondition;
         }
 
         throw new InvalidInputException(YouMustEnterANumberBetween1And3);
     }
 
+    private static bool PlayerSelectedAValidNumberOfPacks(ConsoleKeyInfo key, out int numberOfPacks)
+    {
+        return int.TryParse(key.KeyChar.ToString(), out numberOfPacks) 
+               && numberOfPacks.IsBetween(1, to: 9);
+    }
+    
+    private static bool PlayerEnteredAValidMatchingCondition(ConsoleKeyInfo key, out int matchingType)
+    {
+        return int.TryParse(key.KeyChar.ToString(), out matchingType)
+               && matchingType.IsBetween(1, to: 3);
+    }
 }

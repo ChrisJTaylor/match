@@ -1,10 +1,12 @@
 using FluentAssertions;
 using Match.Domain;
 using Match.Domain.Cards;
-using Match.Domain.GameRoutine;
 using Match.Domain.GameSetup;
 using Moq;
 using NUnit.Framework;
+using static Match.Domain.Cards.CardSuits;
+using static Match.Domain.Cards.CardValues;
+using static Match.Domain.GameRoutine.MatchingCondition;
 
 namespace Match.Tests.GameRoutine.WhenPlayingAGame;
 
@@ -18,8 +20,8 @@ public class AndNoMoreCardsCanBeDrawn
     {
         _cardCollection = new[]
         {
-            new Card(CardValues.One, CardSuits.Clubs),
-            new Card(CardValues.Three, CardSuits.Diamonds)
+            new Card(One, Clubs),
+            new Card(Three, Diamonds)
         };
         
         var deckBuilder = new Mock<IDeckBuilder>();
@@ -29,7 +31,7 @@ public class AndNoMoreCardsCanBeDrawn
 
         _game = new Game(deckBuilder.Object, new PlayerBuilder());
         
-        _game.StartNewGameWithOptions(new GameOptions(1, MatchingCondition.CardValueAndSuit));
+        _game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
     }
 
     [Test]

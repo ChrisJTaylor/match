@@ -22,7 +22,7 @@ public class Game
     public Player[] Players { get; private set; }
     public Stack<Card> Pile { get; }
 
-    public void StartNewGameWithOptions(GameOptions selectedOptions)
+    public void PlayNewGameWithOptions(GameOptions selectedOptions)
     {
         Players = _playerBuilder.BuildPlayers();
         

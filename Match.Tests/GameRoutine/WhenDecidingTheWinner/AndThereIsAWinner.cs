@@ -8,6 +8,7 @@ using Moq;
 using NUnit.Framework;
 using static Match.Domain.Cards.CardSuits;
 using static Match.Domain.Cards.CardValues;
+using static Match.Domain.GameRoutine.MatchingCondition;
 
 namespace Match.Tests.GameRoutine.WhenDecidingTheWinner;
 
@@ -38,7 +39,7 @@ public class AndThereIsAWinner
             });
         
         var game = new Game(deckBuilder.Object, playerBuilder.Object);
-        game.StartNewGameWithOptions(new GameOptions(1, MatchingCondition.CardValueAndSuit));
+        game.PlayNewGameWithOptions(new GameOptions(1, CardValueAndSuit));
 
         var adjudicator = new Adjudicator();
 
