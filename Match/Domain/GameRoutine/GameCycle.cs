@@ -23,7 +23,7 @@ public class GameCycle
         var cardInPlay = _gameState.Deck.Pop();
         _gameState.Pile.Push(cardInPlay);
 
-        if (ListenForMatchDeclarations(out var player) 
+        if (APlayerDeclaresMatch(out var player) 
             && TheCardsMatch(cardInPlay, previousCard))
         {
             player.Winnings.AddRange(_gameState.Pile.ToArray());
@@ -33,10 +33,11 @@ public class GameCycle
 
     private bool TheCardsMatch(Card cardInPlay, Card previousCard)
     {
-        return cardInPlay.IsAMatchFor(previousCard, _gameState.Options.SelectedMatchingCondition);
+        var result = cardInPlay.IsAMatchFor(previousCard, _gameState.Options.SelectedMatchingCondition);
+        return result;
     }
 
-    private bool ListenForMatchDeclarations(out Player playerDeclaringMatch)
+    private bool APlayerDeclaresMatch(out Player playerDeclaringMatch)
     {
         playerDeclaringMatch = _gameState.Players.OrderBy(_ => _random.Next()).First();
         return true;

@@ -61,6 +61,7 @@ public class AndThereIsAWinner
     [Test]
     public void ItShouldDeclareTheExpectedWinner()
     {
-        _consoleOut.ToString().Should().Contain("Bill is the winner!");
+        _consoleOut.ToString().Should().Contain("Bill is the winner with 2 cards!");
+        
     }
 }

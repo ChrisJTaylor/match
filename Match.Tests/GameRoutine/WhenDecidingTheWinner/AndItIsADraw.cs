@@ -60,6 +60,6 @@ public class AndItIsADraw
     [Test]
     public void ItShouldDeclareTheGameADraw()
     {
-        _consoleOut.ToString().Should().Contain($"The game is a draw!");
+        _consoleOut.ToString().Should().Contain($"The game is a draw with 2 cards each!");
     }
 }

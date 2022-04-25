@@ -12,15 +12,15 @@ public class Adjudicator
     }
     public void DeclareTheResult()
     {
-        const string draw = "no one";
-        var result = _gameState.Players.First().Winnings.Count == _gameState.Players.Last().Winnings.Count 
-            ?  draw
-            : _gameState.Players.OrderByDescending(player => 
-                player.Winnings.Count).First().Name;
+        var winner = _gameState.Players.OrderByDescending(player => 
+            player.Winnings.Count).First();
 
-        var message = result == draw
-            ? "The game is a draw!"
-            : $"{result} is the winner!";
+        var message = $"{winner.Name} is the winner with {winner.Winnings.Count} cards!";
+        
+        if (_gameState.Players.All(player => player.Winnings.Count == winner.Winnings.Count))
+        {
+            message = $"The game is a draw with {_gameState.Players.First().Winnings.Count} cards each!";
+        }
         
         _consoleOut.WriteLine(message);
     }
