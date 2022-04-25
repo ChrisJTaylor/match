@@ -10,5 +10,5 @@ public struct Player
         Winnings = new List<Card>();
     }
     public string Name { get; }
-    public IList<Card> Winnings { get; }
+    public List<Card> Winnings { get; }
 }

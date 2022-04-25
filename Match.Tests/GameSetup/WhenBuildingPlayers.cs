@@ -33,8 +33,8 @@ public class WhenBuildingPlayers
     }
 
     [Test]
-    public void PlayersShouldHaveAnEmptyPileOfWinnings()
+    public void PlayersShouldNotHaveAnyWinnings()
     {
-        _players.Should().OnlyContain(player => player.Winnings.ToArray() == Array.Empty<Card>());
+        _players.Should().OnlyContain(player => player.Winnings.Count == 0);
     }
 }

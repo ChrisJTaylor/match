@@ -31,9 +31,36 @@ public class Game
 
         while (GameCanContinue())
         {
-            var cardInPlay = Deck.Pop();
-            Pile.Push(cardInPlay);
+            PlayRound(selectedOptions);
         }
+    }
+
+    private void PlayRound(GameOptions selectedOptions)
+    {
+        if (Pile.TryPeek(out var previousCard))
+        {
+            previousCard = Pile.Peek();
+        }
+
+        var cardInPlay = Deck.Pop();
+        Pile.Push(cardInPlay);
+
+        if (cardInPlay.IsAMatchFor(previousCard, selectedOptions.SelectedMatchingCondition))
+        {
+            var player = ListenForMatchDeclarations();
+            if (player.HasValue)
+            {
+                Console.WriteLine(player.Value.Name);
+                player?.Winnings.AddRange(Pile.ToArray());
+                Pile.Clear();
+            }
+        }
+    }
+
+    private Player? ListenForMatchDeclarations()
+    {
+        var rnd = new Random(DateTime.Now.Millisecond);
+        return Players[rnd.Next(0, Players.Length)];
     }
 
     private bool GameCanContinue()
