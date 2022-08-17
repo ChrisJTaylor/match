@@ -26,17 +26,3 @@ The game will then ask you to select the matching condition to be used, from the
 
 After the selections are complete, the game will run a simulation of a game between Jack and Jill.
 When they have played through all the cards in the Deck, the result will be displayed.
-
-### Notes on how I feel the Kata went
-
-I enjoyed building this solution as it is offers a lot of choice for approaches and design patterns. It would be interesting to try and Event Sourcing approach, and have various components react to the events as they are broadcast.
-
-I'm generally happy with how it went, although I had toyed for a while with building a Narrator class and using a decorator pattern to wrap it around the GameCycle, so I could decouple the console writes and bind test around them. I decided against it in the end, as in the context of the kata, the narration is purely presentation and so I don't feel it warrants the extra work.
-
-I will revisit this Kata in a couple of weeks time and run through it again with a different approach.
-
-It would be interesting to see how extensible my solution is. I'd like to try adding more players, as well as actual human players, and building up some kind of rule set could be fun too. Something along the lines of penalties for declaring a match when the cards don't match, for instance.
-
-When it came to shuffling the deck, I just used a basic randomiser to keep things simple, but I'd look into creating some kind of custom sorter instead, so that could have some control over the amount (and types) of pairings within the Deck. This could make the game quite fun, especially if I introduce penalties for false matches - it could be fun setting up pairs that look similar at a glance. Diamonds and Hearts, for instance.
-
-On the presentation side, it would be good to introduce some colour to the output, especially for Cards, but it would also be useful to make the players stand out from each other too.
