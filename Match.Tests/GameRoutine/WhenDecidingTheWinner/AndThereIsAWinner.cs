@@ -1,19 +1,6 @@
-using System;
-using System.IO;
-using System.Text;
-using AutoFixture;
-using FluentAssertions;
-using Match.Domain;
-using Match.Domain.Cards;
-using Match.Domain.GameRoutine;
-using Match.Domain.GameSetup;
-using Moq;
-using NUnit.Framework;
-using static Match.Domain.Cards.CardSuits;
-using static Match.Domain.Cards.CardValues;
-using static Match.Domain.GameRoutine.MatchingCondition;
-
 namespace Match.Tests.GameRoutine.WhenDecidingTheWinner;
+
+using TestHelpers;
 
 public class AndThereIsAWinner
 {
@@ -24,23 +11,18 @@ public class AndThereIsAWinner
     {
         var selectedOptions = new GameOptions(1, CardValueAndSuit);
         
-        var deckBuilder = new Mock<IDeckBuilder>();
-        deckBuilder.Setup(builder => 
-            builder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse))
-            .Returns(Array.Empty<Card>());
+        var deckBuilder = Given.Create<Mock<IDeckBuilder>>()
+            .ThatReturns(Array.Empty<Card>(), forNumberOfPacks: selectedOptions.NumberOfPacksToUse);
 
-        var player1 = new Player("Bill");
-        player1.Winnings.Add(new Card(Ace, Diamonds));
-        player1.Winnings.Add(new Card(Ace, Diamonds));
-        
-        var player2 = new Player("Ben");
-
-        var playerBuilder = new Mock<IPlayerBuilder>();
-        playerBuilder.Setup(builder =>
-            builder.BuildPlayers())
-            .Returns(new[] 
-            { 
-                player1, player2 
+        var playerBuilder = Given.Create<Mock<IPlayerBuilder>>()
+            .WithPlayers(new[] 
+            {
+                Given.PlayerNamed("Bill").WithWinnings(new [] 
+                { 
+                    new Card(Ace, Diamonds), 
+                    new Card(Ace, Diamonds) 
+                }), 
+                Given.PlayerNamed("Ben") 
             });
         
         var fixture = new Fixture();
@@ -52,10 +34,6 @@ public class AndThereIsAWinner
         
         var game = fixture.Create<Game>();
         game.PlayNewGameWithOptions(selectedOptions);
-
-        var adjudicator = fixture.Create<Adjudicator>();
-
-        adjudicator.DeclareTheResult();
     }
 
     [Test]

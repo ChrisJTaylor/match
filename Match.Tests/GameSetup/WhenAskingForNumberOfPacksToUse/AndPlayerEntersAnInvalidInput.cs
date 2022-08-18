@@ -1,16 +1,10 @@
-using System;
-using System.IO;
-using System.Text;
-using AutoFixture;
-using FluentAssertions;
 using Match.Domain.GameControls;
-using Moq;
-using NUnit.Framework;
 using static Match.Domain.GameControls.Constants.Questions;
 using static Match.Domain.GameControls.Constants.Responses;
-using static Match.Tests.GameSetup.TestHelpers.KeyboardInputHelperExtensions;
 
 namespace Match.Tests.GameSetup.WhenAskingForNumberOfPacksToUse;
+
+using TestHelpers;
 
 public class AndPlayerEntersAnInvalidInput
 {
@@ -20,8 +14,7 @@ public class AndPlayerEntersAnInvalidInput
     [OneTimeSetUp]
     public void Setup()
     {
-        var keyboardInput = new Mock<IKeyboardInput>();
-        keyboardInput.Setup(key => key.ReceiveInput()).Returns(KeyFor('X'));
+        var keyboardInput = Given.Create<Mock<IKeyboardInput>>().ThatPressesKey('X'); 
 
         var fixture = new Fixture();
         fixture.Register(() => keyboardInput.Object);

@@ -1,10 +1,3 @@
-using FluentAssertions;
-using Match.Domain;
-using Match.Domain.Cards;
-using NUnit.Framework;
-using static Match.Domain.Cards.CardSuits;
-using static Match.Domain.Cards.CardValues;
-
 namespace Match.Tests.GameSetup;
 
 public class WhenBuildingAPackOfCards

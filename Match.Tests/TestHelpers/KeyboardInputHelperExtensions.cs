@@ -1,6 +1,4 @@
-using System;
-
-namespace Match.Tests.GameSetup.TestHelpers;
+namespace Match.Tests.TestHelpers;
 
 public static class KeyboardInputHelperExtensions
 {

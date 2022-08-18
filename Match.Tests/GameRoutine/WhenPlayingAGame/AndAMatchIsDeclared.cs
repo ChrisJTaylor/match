@@ -1,32 +1,19 @@
-using System;
-using System.IO;
 using System.Linq;
-using AutoFixture;
-using FluentAssertions;
-using Match.Domain;
-using Match.Domain.Cards;
-using Match.Domain.GameRoutine;
-using Match.Domain.GameSetup;
-using Moq;
-using NUnit.Framework;
-using static Match.Domain.Cards.CardSuits;
-using static Match.Domain.Cards.CardValues;
-using static Match.Domain.GameRoutine.MatchingCondition;
 
 namespace Match.Tests.GameRoutine.WhenPlayingAGame;
 
+using TestHelpers;
+
 public class AndAMatchIsDeclared
 {
-    private IGameState _gameState;
-    
-    private Card[] _cardCollection;
+    private IGameState _gameState = null!;
     
     [OneTimeSetUp]
     public void WhenAGameHasAMatchingPair()
     {
         var selectedOptions = new GameOptions(1, Suit);
         
-        _cardCollection = new[]
+        var cardCollection = new[]
         {
             new Card(Ace, Diamonds),
             new Card(Three, Clubs),
@@ -35,10 +22,8 @@ public class AndAMatchIsDeclared
             new Card(Ace, Clubs)
         };
         
-        var deckBuilder = new Mock<IDeckBuilder>();
-        deckBuilder.Setup(builder => 
-            builder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse))
-            .Returns(_cardCollection);
+        var deckBuilder = Given.Create<Mock<IDeckBuilder>>()
+            .ThatReturns(cardCollection, forNumberOfPacks: selectedOptions.NumberOfPacksToUse);
 
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
@@ -46,8 +31,8 @@ public class AndAMatchIsDeclared
         fixture.Register(() => Console.Out);
         _gameState = fixture.Create<GameState>();
         fixture.Register(() => _gameState);
-        var game = fixture.Create<Game>();
         
+        var game = fixture.Create<Game>();
         game.PlayNewGameWithOptions(selectedOptions);
     }
 
@@ -61,11 +46,6 @@ public class AndAMatchIsDeclared
     public void TheDeclaringPlayerShouldWinTheAccruedCardsInThePile()
     {
         var declaringPlayer = _gameState.Players.First(player => player.Winnings.Count > 0);
-        declaringPlayer.Winnings.Should().ContainInOrder(new[]
-        {
-            new Card(Two, Diamonds),
-            new Card(Three, Diamonds),
-            new Card(Ace, Clubs)
-        });
+        declaringPlayer.Winnings.Should().ContainInOrder(new Card(Two, Diamonds), new Card(Three, Diamonds), new Card(Ace, Clubs));
     }
 }

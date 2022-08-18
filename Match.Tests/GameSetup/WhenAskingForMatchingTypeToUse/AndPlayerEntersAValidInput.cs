@@ -1,15 +1,10 @@
-using System.IO;
-using System.Text;
-using AutoFixture;
-using FluentAssertions;
 using Match.Domain.GameControls;
-using Match.Domain.GameRoutine;
-using Moq;
-using NUnit.Framework;
 using static Match.Domain.GameControls.Constants.Questions;
-using static Match.Tests.GameSetup.TestHelpers.KeyboardInputHelperExtensions;
+using static Match.Tests.TestHelpers.KeyboardInputHelperExtensions;
 
 namespace Match.Tests.GameSetup.WhenAskingForMatchingTypeToUse;
+
+using TestHelpers;
 
 public class AndPlayerEntersAValidInput
 {
@@ -19,8 +14,7 @@ public class AndPlayerEntersAValidInput
     [OneTimeSetUp]
     public void Setup()
     {
-        var keyboardInput = new Mock<IKeyboardInput>();
-        keyboardInput.Setup(key => key.ReceiveInput()).Returns(KeyFor('3'));
+        var keyboardInput = Given.Create<Mock<IKeyboardInput>>().ThatPressesKey('3'); 
 
         var fixture = new Fixture();
         fixture.Register(() => keyboardInput.Object);
@@ -39,6 +33,6 @@ public class AndPlayerEntersAValidInput
     [Test]
     public void ItShouldReturnTheExpectedMatchingType()
     {
-        _matchingType.Should().Be(MatchingCondition.CardValueAndSuit);
+        _matchingType.Should().Be(CardValueAndSuit);
     }
 }

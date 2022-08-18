@@ -1,16 +1,11 @@
-using System;
-using System.IO;
-using System.Text;
-using AutoFixture;
-using FluentAssertions;
 using Match.Domain.GameControls;
-using Moq;
-using NUnit.Framework;
 using static Match.Domain.GameControls.Constants.Questions;
 using static Match.Domain.GameControls.Constants.Responses;
-using static Match.Tests.GameSetup.TestHelpers.KeyboardInputHelperExtensions;
+using static Match.Tests.TestHelpers.KeyboardInputHelperExtensions;
 
 namespace Match.Tests.GameSetup.WhenAskingForMatchingTypeToUse;
+
+using TestHelpers;
 
 public class AndPlayerEntersAValidInputOutOfExpectedRange
 {
@@ -20,8 +15,7 @@ public class AndPlayerEntersAValidInputOutOfExpectedRange
     [OneTimeSetUp]
     public void Setup()
     {
-        var keyboardInput = new Mock<IKeyboardInput>();
-        keyboardInput.Setup(key => key.ReceiveInput()).Returns(KeyFor('0'));
+        var keyboardInput = Given.Create<Mock<IKeyboardInput>>().ThatPressesKey('0'); 
 
         var fixture = new Fixture();
         fixture.Register(() => keyboardInput.Object);

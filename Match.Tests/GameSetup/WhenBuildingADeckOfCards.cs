@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using FluentAssertions;
-using Match.Domain.Cards;
-using Match.Domain.GameSetup;
-using NUnit.Framework;
 using static System.Linq.Enumerable;
 
 namespace Match.Tests.GameSetup;
+
+using TestHelpers;
 
 public class WhenBuildingADeckOfCards
 {
@@ -20,8 +18,7 @@ public class WhenBuildingADeckOfCards
     [TestCase(9)] 
     public void ItShouldBuildTheExpectedDeckUsingTheSpecifiedNumberOfPacks(int numberOfPacks)
     {
-        var deckBuilder = new DeckBuilder();
-        var deck = deckBuilder.BuildDeckUsingNumberOfPacks(numberOfPacks);
+        var deck = Given.Create<DeckBuilder>().BuildDeckUsingNumberOfPacks(numberOfPacks);
 
         var totalCards = new List<Card>();
         foreach (var _ in Range(1, numberOfPacks))

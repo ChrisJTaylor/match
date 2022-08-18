@@ -21,4 +21,8 @@
       <ProjectReference Include="..\Match\Match.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="GameSetup\TestHelpers" />
+    </ItemGroup>
+
 </Project>

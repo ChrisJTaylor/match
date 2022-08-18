@@ -1,12 +1,6 @@
-using System;
-using System.Linq;
-using FluentAssertions;
-using Match.Domain;
-using Match.Domain.Cards;
-using Match.Domain.GameSetup;
-using NUnit.Framework;
-
 namespace Match.Tests.GameSetup;
+
+using TestHelpers;
 
 public class WhenBuildingPlayers
 {
@@ -15,8 +9,7 @@ public class WhenBuildingPlayers
     [OneTimeSetUp]
     public void SetUp()
     {
-        var playerBuilder = new PlayerBuilder();
-        _players = playerBuilder.BuildPlayers();
+        _players = Given.Create<PlayerBuilder>().BuildPlayers();
     }
 
     [Test]

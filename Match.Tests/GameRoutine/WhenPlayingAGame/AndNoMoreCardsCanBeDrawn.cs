@@ -1,22 +1,11 @@
-using System;
-using AutoFixture;
-using FluentAssertions;
-using Match.Domain;
-using Match.Domain.Cards;
-using Match.Domain.GameRoutine;
-using Match.Domain.GameSetup;
-using Moq;
-using NUnit.Framework;
-using static Match.Domain.Cards.CardSuits;
-using static Match.Domain.Cards.CardValues;
-using static Match.Domain.GameRoutine.MatchingCondition;
-
 namespace Match.Tests.GameRoutine.WhenPlayingAGame;
+
+using TestHelpers;
 
 public class AndNoMoreCardsCanBeDrawn
 {
-    private IGameState _gameState;
-    private Card[] _cardCollection;
+    private IGameState _gameState = null!;
+    private Card[] _cardCollection = null!;
     
     [OneTimeSetUp]
     public void WhenAGameIsComingToAClose()
@@ -29,10 +18,8 @@ public class AndNoMoreCardsCanBeDrawn
             new Card(Three, Diamonds)
         };
         
-        var deckBuilder = new Mock<IDeckBuilder>();
-        deckBuilder.Setup(builder => 
-            builder.BuildDeckUsingNumberOfPacks(selectedOptions.NumberOfPacksToUse))
-            .Returns(_cardCollection);
+        var deckBuilder = Given.Create<Mock<IDeckBuilder>>()
+            .ThatReturns(_cardCollection, forNumberOfPacks: selectedOptions.NumberOfPacksToUse);
 
         var fixture = new Fixture();
         fixture.Register(() => deckBuilder.Object);
@@ -40,8 +27,8 @@ public class AndNoMoreCardsCanBeDrawn
         fixture.Register(() => Console.Out);
         _gameState = fixture.Create<GameState>();
         fixture.Register(() => _gameState);
-        var game = fixture.Create<Game>(); 
         
+        var game = fixture.Create<Game>(); 
         game.PlayNewGameWithOptions(selectedOptions);
     }
 
