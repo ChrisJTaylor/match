@@ -1,5 +1,6 @@
 namespace Match.Tests.GameSetup;
 
+using System.Linq;
 using TestHelpers;
 
 public class WhenBuildingPlayers
@@ -19,10 +20,9 @@ public class WhenBuildingPlayers
     }
 
     [Test]
-    public void PlayersShouldHaveExpectedNames()
+    public void PlayersShouldHaveUniqueNames()
     {
-        _players.Should().Contain(player => player.Name == "Jack");
-        _players.Should().Contain(player => player.Name == "Jill");
+        _players.DistinctBy(player => player.Name).Should().HaveCount(2);
     }
 
     [Test]
