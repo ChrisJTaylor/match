@@ -14,7 +14,7 @@ public class AndPlayerEntersAnInvalidInput
     [OneTimeSetUp]
     public void Setup()
     {
-        var keyboardInput = Given.Create<Mock<IKeyboardInput>>().ThatPressesKey('Y'); 
+        var keyboardInput = Given.A<Mock<IKeyboardInput>>().ThatPressesKey('Y'); 
 
         var fixture = new Fixture();
         fixture.Register(() => keyboardInput.Object);

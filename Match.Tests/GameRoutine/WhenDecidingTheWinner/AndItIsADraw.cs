@@ -11,10 +11,10 @@ public class AndItIsADraw
     {
         var selectedOptions = new GameOptions(1, CardValueAndSuit);
         
-        var deckBuilder = Given.Create<Mock<IDeckBuilder>>()
+        var deckBuilder = Given.A<Mock<IDeckBuilder>>()
             .ThatReturns(Array.Empty<Card>(), forNumberOfPacks: selectedOptions.NumberOfPacksToUse);
 
-        var playerBuilder = Given.Create<Mock<IPlayerBuilder>>()
+        var playerBuilder = Given.A<Mock<IPlayerBuilder>>()
             .WithPlayers(new[] 
             {
                 Given.PlayerNamed("Bill").WithWinnings(new [] 

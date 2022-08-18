@@ -18,7 +18,7 @@ public class AndNoMoreCardsCanBeDrawn
             new Card(Three, Diamonds)
         };
         
-        var deckBuilder = Given.Create<Mock<IDeckBuilder>>()
+        var deckBuilder = Given.A<Mock<IDeckBuilder>>()
             .ThatReturns(_cardCollection, forNumberOfPacks: selectedOptions.NumberOfPacksToUse);
 
         var fixture = new Fixture();

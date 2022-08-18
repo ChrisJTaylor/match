@@ -6,7 +6,7 @@ using static KeyboardInputHelperExtensions;
 
 public static class Given
 {
-    public static TType Create<TType>() where TType : new()
+    public static TType A<TType>() where TType : new()
     {
         return new TType();
     }

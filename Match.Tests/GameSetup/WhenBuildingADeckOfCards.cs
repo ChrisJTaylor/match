@@ -18,7 +18,7 @@ public class WhenBuildingADeckOfCards
     [TestCase(9)] 
     public void ItShouldBuildTheExpectedDeckUsingTheSpecifiedNumberOfPacks(int numberOfPacks)
     {
-        var deck = Given.Create<DeckBuilder>().BuildDeckUsingNumberOfPacks(numberOfPacks);
+        var deck = Given.A<DeckBuilder>().BuildDeckUsingNumberOfPacks(numberOfPacks);
 
         var totalCards = new List<Card>();
         foreach (var _ in Range(1, numberOfPacks))

@@ -22,7 +22,7 @@ public class AndAMatchIsDeclared
             new Card(Ace, Clubs)
         };
         
-        var deckBuilder = Given.Create<Mock<IDeckBuilder>>()
+        var deckBuilder = Given.A<Mock<IDeckBuilder>>()
             .ThatReturns(cardCollection, forNumberOfPacks: selectedOptions.NumberOfPacksToUse);
 
         var fixture = new Fixture();

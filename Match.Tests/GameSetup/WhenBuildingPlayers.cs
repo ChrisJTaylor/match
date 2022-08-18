@@ -9,7 +9,7 @@ public class WhenBuildingPlayers
     [OneTimeSetUp]
     public void SetUp()
     {
-        _players = Given.Create<PlayerBuilder>().BuildPlayers();
+        _players = Given.A<PlayerBuilder>().BuildPlayers();
     }
 
     [Test]
