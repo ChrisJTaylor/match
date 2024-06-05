@@ -12,20 +12,20 @@ pipeline {
       }
     }
 
+    stage('Checkout'){
+      steps {
+        git branch: 'main', 
+        credentialsId: GITHUB_CREDENTIALS_ID,
+	url: REPO_URL
+      }
+    }
+    
     stage('Setup environment'){
       steps {
         sh label: 'Setup nix environment', 
         script: '''
           nix develop
         ''' 
-      }
-    }
-    
-    stage('Checkout'){
-      steps {
-        git branch: 'main', 
-        credentialsId: GITHUB_CREDENTIALS_ID,
-	url: REPO_URL
       }
     }
     
