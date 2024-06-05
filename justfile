@@ -17,5 +17,8 @@ test:
 package:
   dotnet pack --no-build -c "{{configuration}}" -o "{{artifacts}}"
 
+run:
+  dotnet run --project Match
+
 build-and-test: restore build test
   @echo "Done."

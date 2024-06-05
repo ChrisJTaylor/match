@@ -10,6 +10,14 @@ pipeline {
         cleanWs()
       }
     }
+
+    stage('Setup environment'){
+      steps {
+        bat label: 'Setup nix environment', 
+        script: '''
+          nix develop
+        ''' 
+      }
     
     stage('Checkout'){
       steps {
