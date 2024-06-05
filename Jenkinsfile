@@ -14,7 +14,6 @@ pipeline {
 
     stage('Setup environment'){
       steps {
-        bat label: 'Setup nix environment', 
         script: '''
           nix develop
         ''' 
@@ -31,7 +30,6 @@ pipeline {
     
     stage('Restore packages') {
       steps {
-        bat label: 'Restore package dependencies', 
         script: '''
           just restore
         ''' 
@@ -40,7 +38,6 @@ pipeline {
 
     stage('Build') {
       steps {
-        bat label: 'Build solution', 
         script: '''
           just build
         ''' 
@@ -49,7 +46,6 @@ pipeline {
 
     stage('Run tests') {
       steps {
-        bat label: 'Run all unit tests', 
         script: '''
           just test
         ''' 
@@ -58,7 +54,6 @@ pipeline {
 
     stage('Package') {
       steps {
-        bat label: 'Package',
         script: ''' 
 	  just package
         '''
