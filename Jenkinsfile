@@ -1,9 +1,5 @@
 pipeline {
   agent { label "nix" }
-  environment {
-    GITHUB_CREDENTIALS_ID = "cjt-jenkins-github-app"
-    REPO_URL = 'git@github.com:ChrisJTaylor/match.git'
-  }
 
   stages {
     stage('Clean workspace'){
@@ -12,14 +8,6 @@ pipeline {
       }
     }
 
-    stage('Checkout'){
-      steps {
-        git branch: 'main', 
-        credentialsId: GITHUB_CREDENTIALS_ID,
-	url: REPO_URL
-      }
-    }
-    
     stage('Setup environment'){
       steps {
         sh label: 'Setup nix environment', 
