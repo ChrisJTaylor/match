@@ -6,6 +6,7 @@ configuration := "Release"
 
 restore:
   dotnet restore
+  dotnet tool restore
 
 build:
   dotnet build --no-restore -c "{{configuration}}"
