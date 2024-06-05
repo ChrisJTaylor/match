@@ -4,6 +4,7 @@ pipeline {
     GITHUB_CREDENTIALS_ID = "cjt-jenkins-github-app"
     REPO_URL = 'git@github.com:ChrisJTaylor/match.git'
   }
+
   stages {
     stage('Clean workspace'){
       steps {
@@ -55,7 +56,6 @@ pipeline {
         ''' 
         }
       }
-    }
 
     stage('Package') {
       steps {
