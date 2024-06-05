@@ -2,11 +2,6 @@ pipeline {
   agent { label "nix" }
 
   stages {
-    stage('Clean workspace'){
-      steps {
-        cleanWs()
-      }
-    }
 
     stage('Setup environment'){
       steps {
