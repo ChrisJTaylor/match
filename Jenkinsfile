@@ -18,6 +18,7 @@ pipeline {
           nix develop
         ''' 
       }
+    }
     
     stage('Checkout'){
       steps {
