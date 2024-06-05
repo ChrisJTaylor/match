@@ -4,6 +4,11 @@
 
 The solution is written in C# and uses .Net 6, so you will need to install this if you don't already have it.
 
+If you are running on [Nix](https://nixos.org/), you can just use the included flake by running `nix develop`,
+and this will setup an environment with all the dependencies.
+
+If you are not running Nix, I recommend going through its lengthy install. Or you could install .Net, I suppose...
+
 [Install .Net 6 here](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
 ### How to build
 
