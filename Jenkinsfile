@@ -7,7 +7,7 @@ pipeline {
       steps {
         sh label: 'Setup nix environment', 
         script: '''
-          nix develop
+	  direnv allow
         ''' 
       }
     }

@@ -1,5 +1,5 @@
 {
-  description = "Dotnet devshells";
+  description = "DevShell";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
