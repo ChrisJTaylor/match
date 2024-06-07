@@ -11,7 +11,7 @@ pipeline {
 	    . ~/.nix-profile/etc/profile.d/nix.sh
 	  fi
 
-	  nix-shell --pure --run "echo 'Nix environment loaded'"
+	  exec nix-shell --pure --run "echo 'Nix environment loaded'"
 	'''
       }
     }
@@ -20,7 +20,7 @@ pipeline {
       steps {
         sh label: 'Restore package dependencies', 
         script: '''
-          nix-shell --pure --run "just restore"
+          exec nix-shell --pure --run "just restore"
         ''' 
       }
     }
@@ -29,7 +29,7 @@ pipeline {
       steps {
         sh label: 'Build solution', 
         script: '''
-          nix-shell --pure --run "just build"
+          exec nix-shell --pure --run "just build"
         ''' 
         }
       }
@@ -38,7 +38,7 @@ pipeline {
       steps {
         sh label: 'Run all unit tests', 
         script: '''
-          nix-shell --pure --run "just test"
+          exec nix-shell --pure --run "just test"
         ''' 
         }
       }
@@ -47,7 +47,7 @@ pipeline {
       steps {
         sh label: 'Package',
         script: ''' 
-          nix-shell --pure --run "just package"
+          exec nix-shell --pure --run "just package"
         '''
       }
     }
