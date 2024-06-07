@@ -40,3 +40,5 @@ msbuild.wrn
 artifacts
 test-results
 
+# nix
+.direnv/

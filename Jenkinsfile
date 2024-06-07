@@ -3,20 +3,11 @@ pipeline {
 
   stages {
 
-    stage('Setup environment'){
-      steps {
-        sh label: 'Setup nix environment', 
-        script: '''
-	  direnv allow
-        ''' 
-      }
-    }
-    
     stage('Restore packages') {
       steps {
         sh label: 'Restore package dependencies', 
         script: '''
-          just restore
+          nix-shell --pure --run "just restore"
         ''' 
       }
     }
@@ -25,7 +16,7 @@ pipeline {
       steps {
         sh label: 'Build solution', 
         script: '''
-          just build
+          nix-shell --pure --run "just build"
         ''' 
         }
       }
@@ -34,7 +25,7 @@ pipeline {
       steps {
         sh label: 'Run all unit tests', 
         script: '''
-          just test
+          nix-shell --pure --run "just test"
         ''' 
         }
       }
@@ -43,7 +34,7 @@ pipeline {
       steps {
         sh label: 'Package',
         script: ''' 
-	  just package
+          nix-shell --pure --run "just package"
         '''
       }
     }
