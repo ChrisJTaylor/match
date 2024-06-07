@@ -3,6 +3,19 @@ pipeline {
 
   stages {
 
+    stage('Setup Nix Environment') {
+      steps {
+        sh label: 'Ensure Nix environment is ready',
+	script: '''
+	  if [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then
+	    . ~/.nix-profile/etc/profile.d/nix.sh
+	  fi
+
+	  nix-shell --pure --run "echo 'Nix environment loaded'"
+	'''
+      }
+    }
+
     stage('Restore packages') {
       steps {
         sh label: 'Restore package dependencies', 
