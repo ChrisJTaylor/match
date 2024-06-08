@@ -5,10 +5,7 @@ pipeline {
 
     stage('Setup Nix Environment') {
       steps {
-        sh label: 'Ensure Nix environment is ready',
-	script: '''
-	  sh './run-nix-shell.sh "echo \'Nix environment loaded\'"'
-	'''
+	sh './run-nix-shell.sh "echo \'Nix environment loaded\'"'
       }
     }
 
