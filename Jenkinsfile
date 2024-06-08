@@ -7,11 +7,7 @@ pipeline {
       steps {
         sh label: 'Ensure Nix environment is ready',
 	script: '''
-	  if [ -f ~/.nix-profile/etc/profile.d/nix.sh ]; then
-	    . ~/.nix-profile/etc/profile.d/nix.sh
-	  fi
-
-	  exec nix-shell --pure --run "echo 'Nix environment loaded'"
+	  sh './run-nix-shell.sh "echo \'Nix environment loaded\'"'
 	'''
       }
     }
