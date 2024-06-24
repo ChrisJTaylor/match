@@ -25,4 +25,20 @@
       <Folder Include="GameSetup\TestHelpers" />
     </ItemGroup>
 
+    <Target Name="ClearPreviousCoverageResults" BeforeTargets="Build" >
+      <Message Text="Clearing previous results" />
+      <Exec Command="just clear-previous-results" ContinueOnError="WarnAndContinue" />
+      <Message Text="Previous results cleared" />
+    </Target>
+
+    <Target Name="Final" AfterTargets="Build;Test;VSTest;All" >
+      <Message Text="Override tests" Importance="High" />
+    </Target>
+
+    <Target Name="GenerateCoverage" AfterTargets="AfterTest" >
+      <Message Text="Generating coverage" />
+      <Exec Command="just coverage" ContinueOnError="WarnAndContinue" />
+      <Message Text="Coverage generated" />
+    </Target>
+
 </Project>

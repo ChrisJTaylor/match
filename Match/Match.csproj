@@ -12,4 +12,9 @@
       <PackageReference Include="SimpleInjector" Version="5.3.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Watch Include="**/*.cs" />
+      <None Update="**/bin/**/*;**/obj/**/*" Watch="false" />
+    </ItemGroup>
+
 </Project>
